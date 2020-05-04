@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30028.174
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TPUM.Logic", "TPUM.Logic\TPUM.Logic.csproj", "{A91CEDEC-A88F-4BE1-B3FB-69C082639D80}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TPUM.Data", "TPUM.Data\TPUM.Data.csproj", "{20B82AC8-2FCE-416C-A961-A9B35FABAC13}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPUM.GUI", "TPUM.GUI\TPUM.GUI.csproj", "{FCDE6720-9F37-4B15-9CA4-87929E592D1C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A91CEDEC-A88F-4BE1-B3FB-69C082639D80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A91CEDEC-A88F-4BE1-B3FB-69C082639D80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A91CEDEC-A88F-4BE1-B3FB-69C082639D80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A91CEDEC-A88F-4BE1-B3FB-69C082639D80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20B82AC8-2FCE-416C-A961-A9B35FABAC13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20B82AC8-2FCE-416C-A961-A9B35FABAC13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20B82AC8-2FCE-416C-A961-A9B35FABAC13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20B82AC8-2FCE-416C-A961-A9B35FABAC13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCDE6720-9F37-4B15-9CA4-87929E592D1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCDE6720-9F37-4B15-9CA4-87929E592D1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCDE6720-9F37-4B15-9CA4-87929E592D1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCDE6720-9F37-4B15-9CA4-87929E592D1C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {491C638A-2EE7-47DD-AC00-7FA8230876A1}
+	EndGlobalSection
+EndGlobal
