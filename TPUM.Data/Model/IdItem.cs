@@ -2,11 +2,11 @@
 
 namespace TPUM.Data.Model
 {
-    public class BaseModel
+    public abstract class IdItem
     {
-        public Guid ID { get; set; }
+        public Guid ID { get; }
 
-        public BaseModel()
+        protected IdItem()
         {
             ID = Guid.NewGuid();
         }

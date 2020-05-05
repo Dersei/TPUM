@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace TPUM.GUI
+namespace TPUM.GUI.View
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

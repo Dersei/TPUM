@@ -7,11 +7,13 @@ namespace TPUM.Data
     {
         public List<Game> Games { get; set; }
         public List<Publisher> Publishers { get; set; }
+        public List<User> Users { get; set; }
 
         public DataContext()
         {
             Games = new List<Game>();
             Publishers = new List<Publisher>();
+            Users = new List<User>();
         }
     }
 }

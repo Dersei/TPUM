@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace TPUM.GUI.ViewModel
+namespace TPUM.GUI.ViewModel.Commands
 {
     internal class RelayCommand : ICommand
     {
