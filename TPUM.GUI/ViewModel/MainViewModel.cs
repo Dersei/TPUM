@@ -5,16 +5,20 @@ using TPUM.Data.Model;
 using TPUM.GUI.Interfaces;
 using TPUM.GUI.ViewModel.Commands;
 using TPUM.Logic;
+using TPUM.Logic.DTO;
 
 namespace TPUM.GUI.ViewModel
 {
     public class MainViewModel : BaseViewModel
     {
         private bool _isUserLoggedIn;
-        public ObservableCollection<Game> Games { get; set; }
-        public Game? ChosenGame { get; set; }
+        public ObservableCollection<GameDTO> Games { get; }
+        public ObservableCollection<UserDTO> Users { get; }
+        public GameDTO? ChosenGame { get; set; }
 
         private readonly GamesSystem _gamesSystem;
+        private readonly UsersSystem _usersSystem;
+        private string _textLog = string.Empty;
 
         public bool IsUserLoggedIn
         {
@@ -22,6 +26,16 @@ namespace TPUM.GUI.ViewModel
             set
             {
                 _isUserLoggedIn = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public string TextLog
+        {
+            get => _textLog;
+            set
+            {
+                _textLog = value;
                 RaisePropertyChanged();
             }
         }
@@ -34,12 +48,24 @@ namespace TPUM.GUI.ViewModel
         public MainViewModel()
         {
             _gamesSystem = new GamesSystem();
-            Games = new ObservableCollection<Game>(_gamesSystem.Repository.GetAll());
+            _usersSystem = new UsersSystem();
+            Games = new ObservableCollection<GameDTO>(_gamesSystem.GetAllGames());
+            Users = new ObservableCollection<UserDTO>(_usersSystem.GetAllUsers());
 
             DoLogIn = new RelayCommand(LogIn);
             DoLogOut = new RelayCommand(LogOut);
             DoDelete = new RelayCommand(Delete);
             DoCreateView = new ParameterCommand<IView>(CreateView);
+
+            Work();
+        }
+
+        private async void Work()
+        {
+            await foreach (string s in _usersSystem.Simulate())
+            {
+                TextLog += s;
+            }
         }
 
         private void LogIn() => IsUserLoggedIn = true;
@@ -56,11 +82,12 @@ namespace TPUM.GUI.ViewModel
             }
         }
 
-        private void AddGame(Game game)
+        private void AddGame(GameDTO game)
         {
             if (!Games.Contains(game))
             {
                 Games.Add(game);
+                _gamesSystem.AddGame(game);
             }
         }
     }

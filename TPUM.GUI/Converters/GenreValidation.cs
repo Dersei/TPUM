@@ -10,7 +10,7 @@ namespace TPUM.GUI.Converters
         private bool ParseGenres(string? genres)
         {
             if (genres is null) throw new NullReferenceException(nameof(genres));
-            string[] genresArray = genres.Split(',', StringSplitOptions.RemoveEmptyEntries);
+            string[] genresArray = genres.Split(',');
             foreach (string s in genresArray)
             {
                 if (!Enum.TryParse(s.Trim(), out Genre _))

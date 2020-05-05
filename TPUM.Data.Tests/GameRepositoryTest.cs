@@ -11,7 +11,7 @@ namespace TPUM.Data.Tests
 
         public GameRepositoryTest()
         {
-            DataContext dataContext = new DataContext();
+            DataContext dataContext = DataContext.Instance;
             _gameRepository = new GameRepository(dataContext);
         }
 

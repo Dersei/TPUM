@@ -1,22 +1,38 @@
 ﻿using System;
+using System.Collections.Generic;
 using TPUM.Data;
+using TPUM.Data.Interfaces;
 using TPUM.Data.Model;
 using TPUM.Data.Repositories;
+using TPUM.Logic.DTO;
 
 namespace TPUM.Logic
 {
     public class GamesSystem
     {
+        private readonly IRepository<Game> _repository;
+        
         public GamesSystem()
         {
-            Repository.Add(new Game("Life is Strange", new Publisher("Dontnod", "F"), 10, new DateTime(2015, 1, 30),
-                new[] {Genre.Adventure}));
-            Repository.Add(new Game("Dragon Age 2", new Publisher("Bioware", "CA"), 10, new DateTime(2011, 3, 8),
-                new[] {Genre.RPG}));
-            Repository.Add(new Game("Mass Effect 2", new Publisher("Bioware", "CA"), 10, new DateTime(2010, 1, 26),
-                new[] {Genre.RPG, Genre.TPS}));
+            _repository  = new GameRepository(DataContext.Instance.FillData(new TestDataFiller()));
         }
 
-        public GameRepository Repository { get; } = new GameRepository(new DataContext());
+        public GamesSystem(IRepository<Game> repository) => _repository = repository;
+
+        public GameDTO GetGame(Guid id)
+        {
+            return _repository.Get(id).ToGameDTO();
+        }
+
+        public IEnumerable<GameDTO> GetAllGames()
+        {
+            return _repository.GetAll().ToGameDTOs();
+        }
+
+        public bool AddGame(GameDTO game)
+        {
+            return _repository.Add(MappingFromDTO.MapGameDTO(game));
+        }
+
     }
 }

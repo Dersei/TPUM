@@ -8,12 +8,11 @@ namespace TPUM.Data.Tests
 {
     public class UserRepositoryTest
     {
-
         private readonly UserRepository _userRepository;
 
         public UserRepositoryTest()
         {
-            DataContext dataContext = new DataContext();
+            DataContext dataContext = DataContext.Instance;
             _userRepository = new UserRepository(dataContext);
         }
 

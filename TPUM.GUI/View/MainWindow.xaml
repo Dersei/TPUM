@@ -27,7 +27,8 @@
             <ColumnDefinition Width="7*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Row="0" Grid.Column="0" Visibility="{Binding IsUserLoggedIn, Converter={StaticResource VisibilityConverter}, ConverterParameter=Invert, Mode=OneWay}">
+        <!-- <Grid Grid.Row="0" Grid.Column="0" Visibility="{Binding IsUserLoggedIn, Converter={StaticResource VisibilityConverter}, ConverterParameter=Invert, Mode=OneWay}"> -->
+        <Grid Grid.Row="0" Grid.Column="0" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -41,7 +42,8 @@
             <TextBox Grid.Column="3"></TextBox>
             <Button Grid.Column="4" Content="Login" Command="{Binding DoLogIn}"></Button>
         </Grid>
-        <Grid Grid.Row="0" Grid.Column="0" Visibility="{Binding IsUserLoggedIn, Converter={StaticResource VisibilityConverter}, Mode=OneWay}">
+        <!-- <Grid Grid.Row="0" Grid.Column="0" Visibility="{Binding IsUserLoggedIn, Converter={StaticResource VisibilityConverter}, Mode=OneWay}"> -->
+        <Grid Grid.Row="0" Grid.Column="0" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -62,7 +64,19 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
-            <TabItem Header="Favourite games"></TabItem>
+            <TabItem Header="Users">
+                <DataGrid ColumnWidth="*" ItemsSource="{Binding Users, Mode=OneWay}" AutoGenerateColumns="False" SelectedItem="{Binding ChosenGame}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Title" Binding="{Binding Username, Mode=OneWay}" Width="*" />
+                        <DataGridTextColumn Header="Favourite games" Binding="{Binding FavouriteGames.Count, Mode=OneWay}" Width="*" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Logging">
+                <Grid>
+                    <TextBox Background="Black" Foreground="Chartreuse"  Text="{Binding TextLog, Mode=TwoWay}"></TextBox>
+                </Grid>
+            </TabItem>
         </TabControl>
         <StackPanel Grid.Row="1" Grid.Column="1">
             <Button Height="25" VerticalAlignment="Top" Content="Delete" Command="{Binding DoDelete}"></Button>

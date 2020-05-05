@@ -10,20 +10,20 @@ namespace TPUM.Data.Tests
 
         public PublisherRepositoryTest()
         {
-            DataContext dataContext = new DataContext();
+            DataContext dataContext = DataContext.Instance;
             _publisherRepository = new PublisherRepository(dataContext);
         }
 
         [Fact]
         public void AddPublisher()
         {
-            Assert.True(_publisherRepository.Add(new Publisher("Dontnod", "F")));
+            Assert.True(_publisherRepository.Add(new Publisher("Dontnod", "FR")));
         }
 
         [Fact]
         public void FindPublisher()
         {
-            Publisher publisher = new Publisher("Dontnod", "F");
+            Publisher publisher = new Publisher("Dontnod", "FR");
             _publisherRepository.Add(publisher);
             Assert.True(_publisherRepository.Get(publisher.ID) != null);
         }
@@ -31,7 +31,7 @@ namespace TPUM.Data.Tests
         [Fact]
         public void RemovePublisher()
         {
-            Publisher publisher = new Publisher("Dontnod", "F");
+            Publisher publisher = new Publisher("Dontnod", "FR");
             _publisherRepository.Add(publisher);
             Assert.True(_publisherRepository.Remove(publisher.ID));
         }
@@ -39,7 +39,7 @@ namespace TPUM.Data.Tests
         [Fact]
         public void UpdatePublisher()
         {
-            Publisher publisher = new Publisher("Dontnod", "F");
+            Publisher publisher = new Publisher("Dontnod", "FR");
             Publisher publisher2 = new Publisher("Bioware", "CA");
             _publisherRepository.Add(publisher);
             Assert.True(_publisherRepository.Update(publisher.ID, publisher2));

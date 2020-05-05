@@ -7,6 +7,8 @@
         RTS,
         WalkingSim,
         Adventure,
-        TPS
+        TPS,
+        ImmersiveSim,
+        Action
     }
 }
