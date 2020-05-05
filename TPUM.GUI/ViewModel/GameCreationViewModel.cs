@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Input;
-using TPUM.Data;
 using TPUM.Data.Model;
 using TPUM.GUI.ViewModel.Commands;
 using TPUM.Logic.DTO;
+using TPUM.Logic.Systems;
 
 namespace TPUM.GUI.ViewModel
 {
     public class GameCreationViewModel : BaseViewModel
     {
         private string? _title;
-        private List<Publisher>? _publisher;
+        private List<PublisherDTO>? _publisher;
         private PublisherDTO? _selectedPublisher;
         private decimal _rating;
         private DateTime _premiere;
@@ -22,7 +23,7 @@ namespace TPUM.GUI.ViewModel
         public GameCreationViewModel()
         {
             Title = "";
-            Publisher = DataContext.Instance.Publishers;
+            Publisher = PublishersSystem.Instance.GetAllPublishers().ToList();
             Rating = 0;
             Premiere = DateTime.Now;
             Genres = new Genre[0];
@@ -41,7 +42,7 @@ namespace TPUM.GUI.ViewModel
             }
         }
 
-        public List<Publisher> Publisher
+        public List<PublisherDTO> Publisher
         {
             get => _publisher!;
             set

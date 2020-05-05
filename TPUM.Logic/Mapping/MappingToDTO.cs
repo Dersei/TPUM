@@ -3,7 +3,7 @@ using System.Linq;
 using TPUM.Data.Model;
 using TPUM.Logic.DTO;
 
-namespace TPUM.Logic
+namespace TPUM.Logic.Mapping
 {
     public static class MappingToDTO
     {
@@ -37,6 +37,14 @@ namespace TPUM.Logic
             }
         }
 
+        public static IEnumerable<PublisherDTO> MapPublisherCollection(IEnumerable<Publisher> publishers)
+        {
+            foreach (Publisher publisher in publishers)
+            {
+                yield return publisher.ToPublisherDTO();
+            }
+        }
+
         public static IEnumerable<GameDTO> ToGameDTOs(this IEnumerable<Game> games) => MapGameCollection(games);
 
         public static UserDTO MapUser(User user)
@@ -47,6 +55,7 @@ namespace TPUM.Logic
         public static UserDTO ToUserDTO(this User user) => MapUser(user);
         
         public static IEnumerable<UserDTO> ToUserDTOs(this IEnumerable<User> users) => MapUserCollection(users);
+        public static IEnumerable<PublisherDTO> ToPublisherDTOs(this IEnumerable<Publisher> publishers) => MapPublisherCollection(publishers);
 
     }
 }

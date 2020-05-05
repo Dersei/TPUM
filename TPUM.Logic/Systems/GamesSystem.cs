@@ -5,12 +5,15 @@ using TPUM.Data.Interfaces;
 using TPUM.Data.Model;
 using TPUM.Data.Repositories;
 using TPUM.Logic.DTO;
+using TPUM.Logic.Interfaces;
+using TPUM.Logic.Mapping;
 
-namespace TPUM.Logic
+namespace TPUM.Logic.Systems
 {
-    public class GamesSystem
+    public class GamesSystem : IReportable
     {
         private readonly IRepository<Game> _repository;
+        private int _counter;
         
         public GamesSystem()
         {
@@ -31,8 +34,18 @@ namespace TPUM.Logic
 
         public bool AddGame(GameDTO game)
         {
-            return _repository.Add(MappingFromDTO.MapGameDTO(game));
+            if (_repository.Add(MappingFromDTO.MapGameDTO(game)))
+            {
+                _counter++;
+                return true;
+            }
+
+            return false;
         }
 
+        public string CreateReport()
+        {
+            return $"Added {_counter} new games to database {Environment.NewLine}";
+        }
     }
 }

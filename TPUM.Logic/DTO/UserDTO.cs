@@ -17,5 +17,7 @@ namespace TPUM.Logic.DTO
         public string Username { get; set; }
         public string Password { get; set; }
         public List<GameDTO> FavouriteGames { get; set; }
+
+        public override string ToString() => Username;
     }
 }

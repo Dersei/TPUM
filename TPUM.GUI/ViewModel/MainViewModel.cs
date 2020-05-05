@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Input;
-using TPUM.Data.Model;
 using TPUM.GUI.Interfaces;
 using TPUM.GUI.ViewModel.Commands;
 using TPUM.Logic;
 using TPUM.Logic.DTO;
+using TPUM.Logic.Systems;
 
 namespace TPUM.GUI.ViewModel
 {
@@ -19,6 +22,12 @@ namespace TPUM.GUI.ViewModel
         private readonly GamesSystem _gamesSystem;
         private readonly UsersSystem _usersSystem;
         private string _textLog = string.Empty;
+        private readonly CancellationTokenSource _tokenSource;
+        private readonly StringLogSender _userSender;
+        private readonly StringLogSender _gameSender;
+        private readonly UserLogger _userLogger;
+        private readonly GameLogger _gameLogger;
+        private readonly StringBuilder _sb = new StringBuilder();
 
         public bool IsUserLoggedIn
         {
@@ -36,6 +45,8 @@ namespace TPUM.GUI.ViewModel
             set
             {
                 _textLog = value;
+                _textLog += _sb.ToString();
+                _sb.Clear();
                 RaisePropertyChanged();
             }
         }
@@ -44,25 +55,37 @@ namespace TPUM.GUI.ViewModel
         public ICommand DoLogOut { get; }
         public ICommand DoDelete { get; }
         public ICommand DoCreateView { get; }
+        public ICommand DoCancelLog { get; }
 
         public MainViewModel()
         {
+            _tokenSource = new CancellationTokenSource();
             _gamesSystem = new GamesSystem();
             _usersSystem = new UsersSystem();
             Games = new ObservableCollection<GameDTO>(_gamesSystem.GetAllGames());
             Users = new ObservableCollection<UserDTO>(_usersSystem.GetAllUsers());
 
+            _userSender = new StringLogSender(_usersSystem, TimeSpan.FromSeconds(10));
+            _gameSender = new StringLogSender(_gamesSystem, TimeSpan.FromSeconds(10));
+            Task.Run(() => _userSender.SendReport());
+            Task.Run(() => _gameSender.SendReport());
+            _userLogger = new UserLogger();
+            _gameLogger = new GameLogger(_sb);
+            _userLogger.Subscribe(_userSender);
+            _gameLogger.Subscribe(_gameSender);
+
             DoLogIn = new RelayCommand(LogIn);
             DoLogOut = new RelayCommand(LogOut);
             DoDelete = new RelayCommand(Delete);
             DoCreateView = new ParameterCommand<IView>(CreateView);
-
+            DoCancelLog = new RelayCommand(CancelLog);
             Work();
         }
 
         private async void Work()
         {
-            await foreach (string s in _usersSystem.Simulate())
+            PeriodicTask<string> task = new PeriodicTask<string>(TimeSpan.FromSeconds(5));
+            await foreach (string s in task.Start((() => "Logging..." + Environment.NewLine), _tokenSource.Token))
             {
                 TextLog += s;
             }
@@ -71,6 +94,7 @@ namespace TPUM.GUI.ViewModel
         private void LogIn() => IsUserLoggedIn = true;
         private void LogOut() => IsUserLoggedIn = false;
         private void Delete() => Games.Remove(ChosenGame!);
+        private void CancelLog() => _tokenSource.Cancel();
 
         private void CreateView(IView view)
         {

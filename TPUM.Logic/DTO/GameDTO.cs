@@ -21,5 +21,14 @@ namespace TPUM.Logic.DTO
         public decimal Rating { get; set; }
         public DateTime Premiere { get; set; }
         public Genre[]? Genres { get; set; }
+
+        public override string ToString()
+        {
+            string info = "";
+            info += "Title: " + Title + Environment.NewLine;
+            info += "Publisher: " + Publisher + Environment.NewLine;
+            info += "Premiere: " + Premiere;
+            return info;
+        }
     }
 }

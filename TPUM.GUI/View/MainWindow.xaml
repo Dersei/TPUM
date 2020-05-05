@@ -75,6 +75,7 @@
             <TabItem Header="Logging">
                 <Grid>
                     <TextBox Background="Black" Foreground="Chartreuse"  Text="{Binding TextLog, Mode=TwoWay}"></TextBox>
+                    <Button Content="Cancel" Height="20" Width="50" HorizontalAlignment="Right" VerticalAlignment="Bottom" Command="{Binding DoCancelLog}"></Button>
                 </Grid>
             </TabItem>
         </TabControl>
