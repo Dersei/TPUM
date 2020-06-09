@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using TPUM.Communication.DTO;
 using TPUM.Data;
 using TPUM.Data.Interfaces;
 using TPUM.Data.Model;
 using TPUM.Data.Repositories;
-using TPUM.Logic.DTO;
 using TPUM.Logic.Interfaces;
 using TPUM.Logic.Mapping;
 

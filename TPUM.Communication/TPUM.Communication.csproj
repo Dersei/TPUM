@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TPUM.Communication\TPUM.Communication.csproj" />
     <ProjectReference Include="..\TPUM.Data\TPUM.Data.csproj" />
+    <ProjectReference Include="..\TPUM.Serialization\TPUM.Serialization.csproj" />
   </ItemGroup>
 
 </Project>

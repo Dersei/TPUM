@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TPUM.Logic.DTO
+namespace TPUM.Communication.DTO
 {
     public class PublisherDTO
     {

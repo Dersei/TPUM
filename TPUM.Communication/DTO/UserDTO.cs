@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TPUM.Logic.DTO
+namespace TPUM.Communication.DTO
 {
     public class UserDTO
     {

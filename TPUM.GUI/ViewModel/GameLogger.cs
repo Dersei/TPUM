@@ -7,7 +7,7 @@ namespace TPUM.GUI.ViewModel
     public class GameLogger : IObserver<string>
     {
         private IDisposable? _cleaner;
-        private StringBuilder _sb;
+        private readonly StringBuilder _sb;
 
         public GameLogger(StringBuilder sb)
         {

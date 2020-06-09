@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using TPUM.Communication.DTO;
 using TPUM.Data.Model;
-using TPUM.Logic.DTO;
 
 namespace TPUM.Logic.Mapping
 {

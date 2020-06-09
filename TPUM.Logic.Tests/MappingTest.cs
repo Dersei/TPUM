@@ -1,6 +1,6 @@
 ﻿using System;
+using TPUM.Communication.DTO;
 using TPUM.Data.Model;
-using TPUM.Logic.DTO;
 using TPUM.Logic.Mapping;
 using Xunit;
 

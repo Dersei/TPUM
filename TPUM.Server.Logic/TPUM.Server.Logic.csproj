@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TPUM.Communication\TPUM.Communication.csproj" />
-    <ProjectReference Include="..\TPUM.Data\TPUM.Data.csproj" />
+    <ProjectReference Include="..\TPUM.Logic\TPUM.Logic.csproj" />
   </ItemGroup>
 
 </Project>

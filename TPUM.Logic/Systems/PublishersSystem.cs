@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using TPUM.Communication.DTO;
 using TPUM.Data;
 using TPUM.Data.Interfaces;
 using TPUM.Data.Model;
 using TPUM.Data.Repositories;
-using TPUM.Logic.DTO;
 using TPUM.Logic.Interfaces;
 using TPUM.Logic.Mapping;
 

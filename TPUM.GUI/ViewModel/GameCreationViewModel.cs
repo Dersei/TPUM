@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
+using TPUM.Communication.DTO;
 using TPUM.Data.Model;
 using TPUM.GUI.ViewModel.Commands;
-using TPUM.Logic.DTO;
 using TPUM.Logic.Systems;
 
 namespace TPUM.GUI.ViewModel

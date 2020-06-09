@@ -1,7 +1,7 @@
 ﻿using System;
 using TPUM.Data.Model;
 
-namespace TPUM.Logic.DTO
+namespace TPUM.Communication.DTO
 {
     public class GameDTO
     {

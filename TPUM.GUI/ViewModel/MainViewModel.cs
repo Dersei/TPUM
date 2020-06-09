@@ -1,13 +1,19 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
+using Newtonsoft.Json;
+using TPUM.Client.Logic;
+using TPUM.Communication;
+using TPUM.Communication.DTO;
 using TPUM.GUI.Interfaces;
 using TPUM.GUI.ViewModel.Commands;
 using TPUM.Logic;
-using TPUM.Logic.DTO;
 using TPUM.Logic.Systems;
 
 namespace TPUM.GUI.ViewModel
@@ -57,6 +63,27 @@ namespace TPUM.GUI.ViewModel
         public ICommand DoCreateView { get; }
         public ICommand DoCancelLog { get; }
 
+
+        private IClientLogic _clientLogic;
+
+
+        private void CreateLogic()
+        {
+            _clientLogic = new ClientLogic()
+            {
+                Log = s => Debug.WriteLine(s),
+                OnLoginResponse = (succeeded) =>
+                {
+                    
+                },
+               OnCreateGameResponse = b =>
+               {
+                   MessageBox.Show(b.ToString());
+               }
+            };
+        }
+
+
         public MainViewModel()
         {
             _tokenSource = new CancellationTokenSource();
@@ -79,7 +106,21 @@ namespace TPUM.GUI.ViewModel
             DoDelete = new RelayCommand(Delete);
             DoCreateView = new ParameterCommand<IView>(CreateView);
             DoCancelLog = new RelayCommand(CancelLog);
+            CreateLogic();
             Work();
+            Connect();
+        }
+
+        public void Connect()
+        {
+            Task.Run(() => _clientLogic.Connect());
+        }
+
+        public void receiveMessage(string message)
+        {
+            Response request = JsonConvert.DeserializeObject<Response>(message);
+            Console.WriteLine(request?.Success);
+            MessageBox.Show(request?.Success + "");
         }
 
         private async void Work()
@@ -111,7 +152,7 @@ namespace TPUM.GUI.ViewModel
             if (!Games.Contains(game))
             {
                 Games.Add(game);
-                _gamesSystem.AddGame(game);
+                _clientLogic.CreateGame(game);
             }
         }
     }

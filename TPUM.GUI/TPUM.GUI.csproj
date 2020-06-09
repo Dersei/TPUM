@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TPUM.Client.Logic\TPUM.Client.Logic.csproj" />
     <ProjectReference Include="..\TPUM.Logic\TPUM.Logic.csproj" />
   </ItemGroup>
 
