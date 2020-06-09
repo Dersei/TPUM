@@ -49,12 +49,13 @@ namespace TPUM.Client.Logic
         public Action? OnClosing { get; set; }
         public Action? OnConnect { get; set; }
 
-        public void Connect()
+        public void Connect(Uri address)
         {
+            _webSocketClient = new WebSocketClient();
             Task<WebSocketConnection> task;
             do
             {
-                task = WebSocketClient.Connect(new Uri("ws://localhost:8081/"), Log);
+                task = _webSocketClient.Connect(address, Log);
             } while (task.Result == null);
             task.Wait();
             Log?.Invoke("Connecting...");
@@ -63,6 +64,8 @@ namespace TPUM.Client.Logic
             _webSocket.OnMessage = OnResponse;
             OnConnect?.Invoke();
         }
+
+        private WebSocketClient? _webSocketClient;
 
         private void OnResponse(string message)
         {

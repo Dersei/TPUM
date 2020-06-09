@@ -22,6 +22,6 @@ namespace TPUM.Client.Logic
         Task CreateGame(GameDTO game);
         Task GetAllGames();
         Task GetOtherUsers();
-        void Connect();
+        void Connect(Uri address);
     }
 }

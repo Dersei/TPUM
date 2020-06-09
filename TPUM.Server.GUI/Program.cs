@@ -11,40 +11,40 @@ namespace TPUM.Server.GUI
     {
         private static async Task Main()
         {
-            bool exit = false;
+            WebSocketServer server = new WebSocketServer();
+            Uri address = new Uri($@"http://localhost:{8081}/");
+            await server.Start(address, OnConnection, new PeriodicTask<string>(TimeSpan.FromSeconds(5), () => $"Logging...{Environment.NewLine}"));
 
-            await WebSocketServer.Server(8081,
-                connection =>
-                {
-                    connection.OnMessage = async s =>
-                    {
-                        string response = ServerProcessing.ProcessData(s, connection);
-                        if (response != null)
-                        {
-                            Console.WriteLine("Sending response");
-                            await connection.SendAsync(response);
-                        }
-                    };
-                    connection.OnError = () =>
-                    {
-                        Console.WriteLine("Error occured");
-                        exit = true;
-                    };
-                    connection.OnClose = () => Console.WriteLine("Closing");
-                }, new PeriodicTask<string>(TimeSpan.FromSeconds(5), () => $"Logging...{Environment.NewLine}")
-                );
             do
             {
-                string? command = Console.ReadLine();
-                if (command?.ToLower() == "exit")
-                    exit = true;
-            } while (!exit);
+                _shouldExit = Console.ReadLine()?.ToLower() == "exit";
+            } while (!_shouldExit);
+
             foreach ((UserDTO user, WebSocketConnection connection) value in ServerProcessing.LoggedInUsers.Values)
             {
                 await value.connection.DisconnectAsync();
             }
         }
 
+        private static bool _shouldExit;
 
+        private static void OnConnection(WebSocketConnection connection)
+        {
+            connection.OnMessage = async s =>
+                {
+                    string response = ServerProcessing.ProcessData(s, connection);
+                    if (response != null)
+                    {
+                        Console.WriteLine("Sending response");
+                        await connection.SendAsync(response);
+                    }
+                };
+            connection.OnError = () =>
+            {
+                Console.WriteLine("Error occured");
+                _shouldExit = true;
+            };
+            connection.OnClose = () => Console.WriteLine("Closing");
+        }
     }
 }

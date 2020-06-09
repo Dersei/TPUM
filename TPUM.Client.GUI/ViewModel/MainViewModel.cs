@@ -164,7 +164,7 @@ namespace TPUM.Client.GUI.ViewModel
 
         public void Connect()
         {
-            Task.Run(() => _clientLogic?.Connect());
+            Task.Run(() => _clientLogic?.Connect(new Uri("ws://localhost:8081/")));
         }
 
         private void LogIn() => IsUserLoggedIn = true;

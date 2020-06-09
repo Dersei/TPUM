@@ -57,6 +57,7 @@ namespace TPUM.Server.GUI
 
         public static string ProcessRequestCreateGame(RequestCreateGame request)
         {
+            if(request.Game is null) return Serializer.Serialize(new ResponseCreateGame { Message = "Game adding", CreatedGame = null, Success = false });
             bool result = ServerLogic?.CreateGame(request.Game) ?? false;
             Console.WriteLine(request.Game);
             return Serializer.Serialize(new ResponseCreateGame { Message = "Game adding", CreatedGame = request.Game, Success = result });
@@ -64,6 +65,7 @@ namespace TPUM.Server.GUI
 
         public static string ProcessRequestLogIn(RequestLogIn request, WebSocketConnection connection)
         {
+            if(request.Credentials is null) return Serializer.Serialize(new ResponseLogIn { Message = "User logged in", Success = false, Token = default });
             bool result = ServerLogic?.Login(request.Credentials) ?? false;
             Console.WriteLine(request.Credentials);
             SessionToken token =

@@ -9,26 +9,25 @@ using TPUM.Logic;
 
 namespace TPUM.Server.Logic
 {
-    public static class WebSocketServer
+    public class WebSocketServer
     {
         #region API
 
-        public static async Task Server(int p2pPort, Action<WebSocketConnection> onConnection, PeriodicTask<string>? periodic = null, CancellationTokenSource? tokenSource = null)
+        public async Task Start(Uri address, Action<WebSocketConnection> onConnection, PeriodicTask<string>? periodic = null, CancellationTokenSource? tokenSource = null)
         {
-            Uri uri = new Uri($@"http://localhost:{p2pPort}/");
             _periodic = periodic;
             _tokenSource = tokenSource;
-            await Task.WhenAll(WorkPeriodic(), ServerLoop(uri, onConnection));
+            await Task.WhenAll(WorkPeriodic(), Loop(address, onConnection));
         }
 
         #endregion API
 
         #region private
 
-        private static PeriodicTask<string>? _periodic;
-        private static CancellationTokenSource? _tokenSource;
+        private PeriodicTask<string>? _periodic;
+        private CancellationTokenSource? _tokenSource;
 
-        private static async Task ServerLoop(Uri uri, Action<WebSocketConnection> onConnection)
+        private async Task Loop(Uri uri, Action<WebSocketConnection> onConnection)
         {
             Console.WriteLine("Starting...");
             HttpListener server = new HttpListener();
@@ -48,7 +47,7 @@ namespace TPUM.Server.Logic
             }
         }
 
-        private static async Task WorkPeriodic()
+        private async Task WorkPeriodic()
         {
             if (_periodic is null) return;
             await foreach (string s in _periodic.Start(_tokenSource?.Token ?? default))

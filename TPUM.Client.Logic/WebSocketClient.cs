@@ -8,11 +8,11 @@ using TPUM.Communication;
 
 namespace TPUM.Client.Logic
 {
-    public static class WebSocketClient
+    public class WebSocketClient
     {
         #region API
 
-        public static async Task<WebSocketConnection> Connect(Uri peer, Action<string>? log)
+        public async Task<WebSocketConnection> Connect(Uri peer, Action<string>? log)
         {
             ClientWebSocket clientWebSocket = new ClientWebSocket();
             await clientWebSocket.ConnectAsync(peer, CancellationToken.None);
