@@ -2,12 +2,13 @@
 using System.Threading.Tasks;
 using TPUM.Communication;
 using TPUM.Communication.DTO;
+using TPUM.Logic;
+using TPUM.Server.Logic;
 
-namespace TPUM.Server
+namespace TPUM.Server.GUI
 {
     internal class Program
     {
-       
         private static async Task Main()
         {
             bool exit = false;
@@ -30,7 +31,8 @@ namespace TPUM.Server
                         exit = true;
                     };
                     connection.OnClose = () => Console.WriteLine("Closing");
-                });
+                }, new PeriodicTask<string>(TimeSpan.FromSeconds(5), () => $"Logging...{Environment.NewLine}")
+                );
             do
             {
                 string? command = Console.ReadLine();
@@ -43,6 +45,6 @@ namespace TPUM.Server
             }
         }
 
-        
+
     }
 }

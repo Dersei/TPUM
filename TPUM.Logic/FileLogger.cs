@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 
-namespace TPUM.GUI.ViewModel
+namespace TPUM.Logic
 {
-    public class UserLogger : IObserver<string>
+    public class FileLogger : IObserver<string>
     {
         private IDisposable? _cleaner;
 
@@ -28,6 +28,7 @@ namespace TPUM.GUI.ViewModel
         public void OnNext(string value)
         {
             File.AppendAllText("userreport.txt", value);
+            Console.WriteLine(value);
         }
     }
 }

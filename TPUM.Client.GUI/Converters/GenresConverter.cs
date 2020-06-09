@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Data;
 using TPUM.Data.Model;
 
-namespace TPUM.GUI.Converters
+namespace TPUM.Client.GUI.Converters
 {
     internal class GenresConverter : IValueConverter
     {

@@ -13,39 +13,46 @@ namespace TPUM.Logic.Systems
     public class GamesSystem : IReportable
     {
         private readonly IRepository<Game> _repository;
+        private readonly object _syncObject = new object();
         private int _counter;
-        
+
         public GamesSystem()
         {
-            _repository  = new GameRepository(DataContext.Instance.FillData(new TestDataFiller()));
+            _repository = new GameRepository(DataContext.Instance.FillData(new TestDataFiller()));
         }
 
         public GamesSystem(IRepository<Game> repository) => _repository = repository;
 
         public GameDTO GetGame(Guid id)
         {
-            return _repository.Get(id).ToGameDTO();
+            lock (_syncObject)
+                return _repository.Get(id).ToGameDTO();
         }
 
         public IEnumerable<GameDTO> GetAllGames()
         {
-            return _repository.GetAll().ToGameDTOs();
+            lock (_syncObject)
+                return _repository.GetAll().ToGameDTOs();
         }
 
         public bool AddGame(GameDTO game)
         {
-            if (_repository.Add(MappingFromDTO.MapGameDTO(game)))
+            lock (_syncObject)
             {
-                _counter++;
-                return true;
-            }
+                if (_repository.Add(MappingFromDTO.MapGameDTO(game)))
+                {
+                    _counter++;
+                    return true;
+                }
 
-            return false;
+                return false;
+            }
         }
 
         public string CreateReport()
         {
-            return $"Added {_counter} new games to database {Environment.NewLine}";
+            lock (_syncObject)
+                return $"Added {_counter} new games to database {Environment.NewLine}";
         }
     }
 }

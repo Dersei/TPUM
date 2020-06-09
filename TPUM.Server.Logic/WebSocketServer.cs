@@ -5,25 +5,32 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using TPUM.Communication;
+using TPUM.Logic;
 
-namespace TPUM.Server
+namespace TPUM.Server.Logic
 {
     public static class WebSocketServer
     {
         #region API
 
-        public static async Task Server(int p2pPort, Action<WebSocketConnection> onConnection)
+        public static async Task Server(int p2pPort, Action<WebSocketConnection> onConnection, PeriodicTask<string>? periodic = null, CancellationTokenSource? tokenSource = null)
         {
             Uri uri = new Uri($@"http://localhost:{p2pPort}/");
-            await ServerLoop(uri, onConnection);
+            _periodic = periodic;
+            _tokenSource = tokenSource;
+            await Task.WhenAll(WorkPeriodic(), ServerLoop(uri, onConnection));
         }
 
         #endregion API
 
         #region private
 
+        private static PeriodicTask<string>? _periodic;
+        private static CancellationTokenSource? _tokenSource;
+
         private static async Task ServerLoop(Uri uri, Action<WebSocketConnection> onConnection)
         {
+            Console.WriteLine("Starting...");
             HttpListener server = new HttpListener();
             server.Prefixes.Add(uri.OriginalString);
             server.Start();
@@ -38,6 +45,15 @@ namespace TPUM.Server
                 HttpListenerWebSocketContext context = await hc.AcceptWebSocketAsync(null);
                 WebSocketConnection ws = new ServerWebSocketConnection(context.WebSocket, hc.Request.RemoteEndPoint);
                 onConnection?.Invoke(ws);
+            }
+        }
+
+        private static async Task WorkPeriodic()
+        {
+            if (_periodic is null) return;
+            await foreach (string s in _periodic.Start(_tokenSource?.Token ?? default))
+            {
+                Console.WriteLine(s);
             }
         }
 

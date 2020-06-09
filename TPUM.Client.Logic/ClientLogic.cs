@@ -34,15 +34,15 @@ namespace TPUM.Client.Logic
 
         }
 
-        private WebSocketConnection _webSocket;
+        private WebSocketConnection? _webSocket;
 
         public Action<bool, SessionToken>? OnLoginResponse { get; set; }
 
-        public Action<bool, GameDTO>? OnCreateGameResponse { get; set; }
+        public Action<bool, GameDTO?>? OnCreateGameResponse { get; set; }
 
-        public Action<List<GameDTO>>? OnGetAllGamesResponse { get; set; }
-        public Action<List<PublisherDTO>>? OnGetAllPublishersResponse { get; set; }
-        public Action<List<string>>? OnGetOtherUsersResponse { get; set; }
+        public Action<List<GameDTO>?>? OnGetAllGamesResponse { get; set; }
+        public Action<List<PublisherDTO>?>? OnGetAllPublishersResponse { get; set; }
+        public Action<List<string>?>? OnGetOtherUsersResponse { get; set; }
 
         public Action<string>? Log { get; set; }
 
@@ -93,7 +93,7 @@ namespace TPUM.Client.Logic
             {
                 Credentials = user
             };
-            return _webSocket.SendAsync(Serializer.Serialize(interchange));
+            return _webSocket?.SendAsync(Serializer.Serialize(interchange)) ?? Task.FromResult(false);
         }
 
         public Task Logout(SessionToken token)
@@ -102,7 +102,7 @@ namespace TPUM.Client.Logic
             {
                 Token = token
             };
-            return _webSocket.SendAsync(Serializer.Serialize(interchange));
+            return _webSocket?.SendAsync(Serializer.Serialize(interchange)) ?? Task.FromResult(false);
         }
 
         public Task CreateGame(GameDTO game)
@@ -111,25 +111,25 @@ namespace TPUM.Client.Logic
             {
                 Game = game
             };
-            return _webSocket.SendAsync(Serializer.Serialize(interchange));
+            return _webSocket?.SendAsync(Serializer.Serialize(interchange)) ?? Task.FromResult(false);
         }
 
         public Task GetOtherUsers()
         {
             Interchange interchange = new RequestLoggedInUsers();
-            return _webSocket.SendAsync(Serializer.Serialize(interchange));
+            return _webSocket?.SendAsync(Serializer.Serialize(interchange)) ?? Task.FromResult(false);
         }
 
         public Task GetAllGames()
         {
             Interchange interchange = new RequestGetAllGames();
-            return _webSocket.SendAsync(Serializer.Serialize(interchange));
+            return _webSocket?.SendAsync(Serializer.Serialize(interchange)) ?? Task.FromResult(false);
         }
 
         public Task GetAllPublishers()
         {
             Interchange interchange = new RequestGetAllPublishers();
-            return _webSocket.SendAsync(Serializer.Serialize(interchange));
+            return _webSocket?.SendAsync(Serializer.Serialize(interchange)) ?? Task.FromResult(false);
         }
     }
 }

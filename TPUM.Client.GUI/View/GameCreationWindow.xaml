@@ -1,11 +1,11 @@
-﻿<Window x:Class="TPUM.GUI.View.GameCreationWindow"
+﻿<Window x:Class="TPUM.Client.GUI.View.GameCreationWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TPUM.GUI"
-        xmlns:viewModel="clr-namespace:TPUM.GUI.ViewModel"
-        xmlns:converters="clr-namespace:TPUM.GUI.Converters"
+        xmlns:viewModel="clr-namespace:TPUM.Client.GUI.ViewModel"
+        xmlns:converters="clr-namespace:TPUM.Client.GUI.Converters"
         mc:Ignorable="d"
         Title="Create game" Height="200" Width="400">
     <Window.DataContext>

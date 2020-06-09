@@ -8,14 +8,16 @@ namespace TPUM.Logic
 {
     public class PeriodicTask<T> where T : class
     {
-        public PeriodicTask(TimeSpan period)
+        public PeriodicTask(TimeSpan period, Func<T> function)
         {
             Period = period;
+            _function = function;
         }
 
         public TimeSpan Period { get; }
+        private Func<T> _function;
 
-        public async IAsyncEnumerable<T> Start(Func<T> function, [EnumeratorCancellation] CancellationToken token = default, Func<T>? cancellationFunc = default)
+        public async IAsyncEnumerable<T> Start([EnumeratorCancellation] CancellationToken token = default, Func<T>? cancellationFunc = default)
         {
             while (true)
             {
@@ -25,7 +27,7 @@ namespace TPUM.Logic
                     yield return cancellationFunc?.Invoke()!;
                     yield break;
                 }
-                yield return function();
+                yield return _function();
             }
         }
     }

@@ -14,6 +14,7 @@ namespace TPUM.Logic.Systems
     {
         
         private readonly IRepository<Publisher> _repository;
+        private readonly object _syncObject = new object();
 
         public PublishersSystem()
         {
@@ -27,12 +28,14 @@ namespace TPUM.Logic.Systems
 
         public PublisherDTO GetGame(Guid id)
         {
-            return _repository.Get(id).ToPublisherDTO();
+            lock (_syncObject)
+                return _repository.Get(id).ToPublisherDTO();
         }
 
         public IEnumerable<PublisherDTO> GetAllPublishers()
         {
-            return _repository.GetAll().ToPublisherDTOs();
+            lock (_syncObject)
+                return _repository.GetAll().ToPublisherDTOs();
         }
 
         public string CreateReport()

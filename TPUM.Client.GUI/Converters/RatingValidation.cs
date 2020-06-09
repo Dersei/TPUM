@@ -1,8 +1,7 @@
-﻿using System.Diagnostics;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Windows.Controls;
 
-namespace TPUM.GUI.Converters
+namespace TPUM.Client.GUI.Converters
 {
     public class RatingValidation : ValidationRule
     {

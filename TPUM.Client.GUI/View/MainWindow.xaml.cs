@@ -1,7 +1,7 @@
 ﻿using System.Windows;
-using TPUM.GUI.ViewModel;
+using TPUM.Client.GUI.ViewModel;
 
-namespace TPUM.GUI.View
+namespace TPUM.Client.GUI.View
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -11,7 +11,7 @@ namespace TPUM.GUI.View
         public MainWindow()
         {
             InitializeComponent();
-            Closing += (DataContext as MainViewModel).DoClose;
+            Closing += (DataContext as MainViewModel)!.DoClose;
         }
     }
 }

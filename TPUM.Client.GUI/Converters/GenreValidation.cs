@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows.Controls;
 using TPUM.Data.Model;
 
-namespace TPUM.GUI.Converters
+namespace TPUM.Client.GUI.Converters
 {
     public class GenreValidation : ValidationRule
     {

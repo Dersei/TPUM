@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows.Input;
+using TPUM.Client.GUI.ViewModel.Commands;
 using TPUM.Communication.DTO;
-using TPUM.GUI.ViewModel.Commands;
 
-namespace TPUM.GUI.ViewModel
+namespace TPUM.Client.GUI.ViewModel
 {
     internal class UserLoginViewModel : BaseViewModel
     {

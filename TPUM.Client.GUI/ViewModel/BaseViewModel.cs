@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace TPUM.GUI.ViewModel
+namespace TPUM.Client.GUI.ViewModel
 {
     public class BaseViewModel : INotifyPropertyChanged
     {

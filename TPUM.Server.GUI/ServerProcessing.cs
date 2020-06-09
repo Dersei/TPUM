@@ -8,7 +8,7 @@ using TPUM.Communication.Responses;
 using TPUM.Serialization;
 using TPUM.Server.Logic;
 
-namespace TPUM.Server
+namespace TPUM.Server.GUI
 {
     public class ServerProcessing
     {

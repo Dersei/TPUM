@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Windows.Input;
+using TPUM.Client.GUI.ViewModel.Commands;
 using TPUM.Client.Logic;
 using TPUM.Communication.DTO;
 using TPUM.Data.Model;
-using TPUM.GUI.ViewModel.Commands;
 
-namespace TPUM.GUI.ViewModel
+namespace TPUM.Client.GUI.ViewModel
 {
     public class GameCreationViewModel : BaseViewModel
     {
@@ -36,6 +35,7 @@ namespace TPUM.GUI.ViewModel
 
             ClientLogic.Instance.OnGetAllPublishersResponse += dtos =>
             {
+                if (dtos is null) return;
                 Publisher = dtos;
             };
             GetPublishers();

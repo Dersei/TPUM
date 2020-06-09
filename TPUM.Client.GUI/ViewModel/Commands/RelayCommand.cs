@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace TPUM.GUI.ViewModel.Commands
+namespace TPUM.Client.GUI.ViewModel.Commands
 {
-    public class ParameterCommand<T> : ICommand
+    internal class RelayCommand : ICommand
     {
-        public ParameterCommand(Action<T> execute) : this(execute, null!) { }
+        public RelayCommand(Action execute) : this(execute, null!) { }
 
-        public ParameterCommand(Action<T> execute, Func<bool> canExecute)
+        public RelayCommand(Action execute, Func<bool> canExecute)
         {
             _execute = execute ?? throw new ArgumentNullException(nameof(execute));
             _canExecute = canExecute;
@@ -24,7 +24,7 @@ namespace TPUM.GUI.ViewModel.Commands
 
         public virtual void Execute(object parameter)
         {
-            _execute((T)parameter);
+            _execute();
         }
 
         public event EventHandler? CanExecuteChanged;
@@ -34,7 +34,7 @@ namespace TPUM.GUI.ViewModel.Commands
             CanExecuteChanged?.Invoke(this, EventArgs.Empty);
         }
 
-        private readonly Action<T> _execute;
+        private readonly Action _execute;
         private readonly Func<bool> _canExecute;
     }
 }

@@ -15,6 +15,7 @@ namespace TPUM.Logic.Systems
     public class UsersSystem : IReportable
     {
         private readonly IRepository<User> _repository;
+        private readonly object _syncObject = new object();
 
         public UsersSystem()
         {
@@ -25,30 +26,36 @@ namespace TPUM.Logic.Systems
 
         public string CreateReport()
         {
-            List<User> users = _repository.GetAll().ToList();
-            StringBuilder sb = new StringBuilder(users.Count);
-            foreach (User user in users)
+            lock (_syncObject)
             {
-                sb.Append($"User {user.Username} has 0 favourite games");
-                sb.Append(Environment.NewLine);
-            }
+                List<User> users = _repository.GetAll().ToList();
+                StringBuilder sb = new StringBuilder(users.Count);
+                foreach (User user in users)
+                {
+                    sb.Append($"User {user.Username} exists");
+                    sb.Append(Environment.NewLine);
+                }
 
-            return sb.ToString();
+                return sb.ToString();
+            }
         }
 
         public UserDTO GetUser(Guid id)
         {
-            return _repository.Get(id).ToUserDTO();
+            lock (_syncObject)
+                return _repository.Get(id).ToUserDTO();
         }
 
         public IEnumerable<UserDTO> GetAllUsers()
         {
-            return _repository.GetAll().ToUserDTOs();
+            lock (_syncObject)
+                return _repository.GetAll().ToUserDTOs();
         }
 
         public bool CheckIfExists(UserDTO user)
         {
-            return _repository.Exists(user.ToUser());
+            lock (_syncObject)
+                return _repository.Exists(user.ToUser());
         }
 
     }

@@ -9,10 +9,10 @@ namespace TPUM.Client.Logic
     public interface IClientLogic
     {
         Action<bool, SessionToken>? OnLoginResponse { get; set; }
-        Action<bool, GameDTO>? OnCreateGameResponse { get; set; }
-        Action<List<GameDTO>>? OnGetAllGamesResponse { get; set; }
-        Action<List<PublisherDTO>>? OnGetAllPublishersResponse { get; set; }
-        Action<List<string>>? OnGetOtherUsersResponse { get; set; }
+        Action<bool, GameDTO?>? OnCreateGameResponse { get; set; }
+        Action<List<GameDTO>?>? OnGetAllGamesResponse { get; set; }
+        Action<List<PublisherDTO>?>? OnGetAllPublishersResponse { get; set; }
+        Action<List<string>?>? OnGetOtherUsersResponse { get; set; }
         Action<string>? Log { get; set; }
 
         Action? OnClosing { get; set; }

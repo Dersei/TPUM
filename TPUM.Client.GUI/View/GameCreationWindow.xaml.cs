@@ -1,7 +1,7 @@
 ﻿using System.Windows;
-using TPUM.GUI.Interfaces;
+using TPUM.Client.GUI.Interfaces;
 
-namespace TPUM.GUI.View
+namespace TPUM.Client.GUI.View
 {
     /// <summary>
     /// Interaction logic for GameCreationWindow.xaml

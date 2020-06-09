@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace TPUM.GUI.Converters
+namespace TPUM.Client.GUI.Converters
 {
     public class VisibilityConverter : IValueConverter
     {
