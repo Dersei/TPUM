@@ -62,6 +62,16 @@ namespace TPUM.Data.Repositories
             return true;
         }
 
+        public bool Exists(Guid id)
+        {
+            return _dataContext.Users.Any(u => u.ID == id);
+        }
+
+        public bool Exists(User user)
+        {
+            return _dataContext.Users.Contains(user);
+        }
+
         public User Get(string username)
         {
             return _dataContext.Users.Find(g => g.Username == username);

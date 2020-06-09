@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.Eventing.Reader;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Threading;
-using Newtonsoft.Json;
 using TPUM.Client.Logic;
-using TPUM.Communication;
 using TPUM.Communication.DTO;
 using TPUM.GUI.Interfaces;
+using TPUM.GUI.View;
 using TPUM.GUI.ViewModel.Commands;
 using TPUM.Logic;
 using TPUM.Logic.Systems;
@@ -63,9 +63,12 @@ namespace TPUM.GUI.ViewModel
         public ICommand DoCreateView { get; }
         public ICommand DoCancelLog { get; }
 
+        private IClientLogic? _clientLogic;
 
-        private IClientLogic _clientLogic;
-
+        private void RunDispatcher(Action action)
+        {
+            Application.Current.Dispatcher.Invoke(action);
+        }
 
         private void CreateLogic()
         {
@@ -74,11 +77,26 @@ namespace TPUM.GUI.ViewModel
                 Log = s => Debug.WriteLine(s),
                 OnLoginResponse = (succeeded) =>
                 {
-                    
+                    if (succeeded)
+                    {
+                        Debug.WriteLine("Success");
+                        MessageBox.Show("Log in succesful");
+                    }
+                    else
+                    {
+                        Debug.WriteLine("Fail");
+                        RunDispatcher(() => CreateView(new UserLoginWindow()));
+                    }
                 },
-               OnCreateGameResponse = b =>
+               OnCreateGameResponse = (success, game) =>
                {
-                   MessageBox.Show(b.ToString());
+                   if (success)
+                   {
+                       RunDispatcher(() => Games.Add(game));
+                   }
+                   {
+                       Debug.WriteLine("Game exists");
+                   }
                }
             };
         }
@@ -109,20 +127,15 @@ namespace TPUM.GUI.ViewModel
             CreateLogic();
             Work();
             Connect();
+            CreateView(new UserLoginWindow());
         }
 
         public void Connect()
         {
-            Task.Run(() => _clientLogic.Connect());
+            Task.Run(() => _clientLogic?.Connect());
         }
 
-        public void receiveMessage(string message)
-        {
-            Response request = JsonConvert.DeserializeObject<Response>(message);
-            Console.WriteLine(request?.Success);
-            MessageBox.Show(request?.Success + "");
-        }
-
+       
         private async void Work()
         {
             PeriodicTask<string> task = new PeriodicTask<string>(TimeSpan.FromSeconds(5));
@@ -141,18 +154,27 @@ namespace TPUM.GUI.ViewModel
         {
             IView? iView = Activator.CreateInstance(view.GetType()) as IView;
             iView?.ShowDialog();
-            if (iView?.DataContext is GameCreationViewModel gcvm && gcvm?.CreatedGame != null)
+            switch (iView?.DataContext)
             {
-                AddGame(gcvm.CreatedGame);
+                case GameCreationViewModel { CreatedGame: GameDTO createdGame }:
+                    AddGame(createdGame);
+                    break;
+                case UserLoginViewModel { UserCredentials: UserDTO credentials }:
+                    LogIn(credentials);
+                    break;
             }
+        }
+
+        private void LogIn(UserDTO user)
+        {
+            _clientLogic?.TryLogin(user);
         }
 
         private void AddGame(GameDTO game)
         {
             if (!Games.Contains(game))
             {
-                Games.Add(game);
-                _clientLogic.CreateGame(game);
+                _clientLogic?.CreateGame(game);
             }
         }
     }

@@ -2,20 +2,21 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using TPUM.Communication;
 using TPUM.Communication.DTO;
+using TPUM.Communication.Requests;
+using TPUM.Communication.Responses;
 using TPUM.Serialization;
 
 namespace TPUM.Client.Logic
 {
     public class ClientLogic : IClientLogic
     {
-        private WebSocketConnection _webSocket = null;
+        private WebSocketConnection _webSocket;
 
         public Action<bool>? OnLoginResponse { get; set; }
 
-        public Action<bool>? OnCreateGameResponse { get; set; }
+        public Action<bool, GameDTO>? OnCreateGameResponse { get; set; }
 
         public Action<List<GameDTO>>? OnGetAllGamesResponse { get; set; }
 
@@ -32,7 +33,7 @@ namespace TPUM.Client.Logic
                 task = WebSocketClient.Connect(new Uri("ws://localhost:8081/"), Log);
             } while (task.Result == null);
             task.Wait();
-            Log.Invoke("Connecting...");
+            Log?.Invoke("Connecting...");
             _webSocket = task.Result;
             _webSocket.onClose = () => Debug.WriteLine("Closing...");
             _webSocket.onMessage = OnResponse;
@@ -42,15 +43,23 @@ namespace TPUM.Client.Logic
         private void OnResponse(string message)
         {
             Interchange response = Serializer.Deserialize<Interchange>(message);
-            if (response is Response r)
+            if (response is ResponseLogIn rli)
             {
-                OnCreateGameResponse?.Invoke(r.Success);
+                OnLoginResponse?.Invoke(rli.Success);
+            }
+            if (response is ResponseCreateGame r)
+            {
+                OnCreateGameResponse?.Invoke(r.Success, r.CreatedGame);
             }
         }
 
-        public Task TryLogin(string name, string password)
+        public Task TryLogin(UserDTO user)
         {
-            throw new NotImplementedException();
+            Interchange interchange = new RequestLogIn()
+            {
+                Credentials = user
+            };
+            return _webSocket.SendAsync(Serializer.Serialize(interchange));
         }
 
         public Task Logout()

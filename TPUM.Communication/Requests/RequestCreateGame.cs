@@ -1,7 +1,6 @@
-﻿using System.Runtime.Serialization;
-using TPUM.Communication.DTO;
+﻿using TPUM.Communication.DTO;
 
-namespace TPUM.Communication
+namespace TPUM.Communication.Requests
 {
     public class RequestCreateGame : Interchange
     {

@@ -7,7 +7,7 @@
         xmlns:viewModel="clr-namespace:TPUM.GUI.ViewModel"
         xmlns:converters="clr-namespace:TPUM.GUI.Converters"
         mc:Ignorable="d"
-        Title="GameCreationWindow" Height="200" Width="400">
+        Title="Create game" Height="200" Width="400">
     <Window.DataContext>
         <viewModel:GameCreationViewModel/>
     </Window.DataContext>

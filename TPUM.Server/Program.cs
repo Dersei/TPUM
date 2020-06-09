@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using TPUM.Communication;
+using TPUM.Communication.Requests;
+using TPUM.Communication.Responses;
 using TPUM.Serialization;
 using TPUM.Server.Logic;
 
@@ -12,10 +11,9 @@ namespace TPUM.Server
 {
     internal class Program
     {
-        private static IServerLogic _serverLogic;
+        private static readonly IServerLogic ServerLogic = new ServerLogic();
         private static async Task Main()
         {
-            _serverLogic = new ServerLogic();
             bool exit = false;
             Dictionary<int, WebSocketConnection> allConnections = new Dictionary<int, WebSocketConnection>();
 
@@ -64,15 +62,23 @@ namespace TPUM.Server
             return interchange switch
             {
                 RequestCreateGame rcg => ProcessRequestCreateGame(rcg),
+                RequestLogIn rli => ProcessRequestLogIn(rli),
                 _ => GetStatusFail(),
             };
         }
 
         private static string ProcessRequestCreateGame(RequestCreateGame request)
         {
-            bool result = _serverLogic?.CreateGame(request.Game) ?? false;
+            bool result = ServerLogic?.CreateGame(request.Game) ?? false;
             Console.WriteLine(request.Game);
-            return Serializer.Serialize(new Response { Message = "Game adding", Success = result });
+            return Serializer.Serialize(new ResponseCreateGame { Message = "Game adding", CreatedGame = request.Game, Success = result });
+        }
+
+        private static string ProcessRequestLogIn(RequestLogIn request)
+        {
+            bool result = ServerLogic?.Login(request.Credentials) ?? false;
+            Console.WriteLine(request.Credentials);
+            return Serializer.Serialize(new ResponseLogIn { Message = "User logged in", Success = result });
         }
 
         private static string GetStatusFail()

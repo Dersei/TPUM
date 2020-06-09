@@ -1,4 +1,4 @@
-﻿namespace TPUM.Communication
+﻿namespace TPUM.Communication.Responses
 {
     public class Response : Interchange
     {

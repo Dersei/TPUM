@@ -36,7 +36,7 @@ namespace TPUM.Logic.Systems
             return sb.ToString();
         }
 
-        public UserDTO GetGame(Guid id)
+        public UserDTO GetUser(Guid id)
         {
             return _repository.Get(id).ToUserDTO();
         }
@@ -44,6 +44,11 @@ namespace TPUM.Logic.Systems
         public IEnumerable<UserDTO> GetAllUsers()
         {
             return _repository.GetAll().ToUserDTOs();
+        }
+
+        public bool CheckIfExists(UserDTO user)
+        {
+            return _repository.Exists(user.ToUser());
         }
 
     }

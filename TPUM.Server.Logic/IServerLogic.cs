@@ -6,7 +6,7 @@ namespace TPUM.Server.Logic
 {
     public interface IServerLogic
     {
-        bool Login(string userName, string password);
+        bool Login(UserDTO user);
         void Logout(int tokenID);
         bool CreateGame(GameDTO game);
         List<GameDTO> GetAllGames();

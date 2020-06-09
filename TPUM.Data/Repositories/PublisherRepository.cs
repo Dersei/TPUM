@@ -60,5 +60,15 @@ namespace TPUM.Data.Repositories
             publisher.Country = newPublisher.Country;
             return true;
         }
+
+        public bool Exists(Guid id)
+        {
+            return _dataContext.Publishers.Any(u => u.ID == id);
+        }
+
+        public bool Exists(Publisher publisher)
+        {
+            return _dataContext.Publishers.Contains(publisher);
+        }
     }
 }

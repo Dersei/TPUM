@@ -7,8 +7,8 @@ namespace TPUM.Server.Logic
 {
     public class ServerLogic : IServerLogic
     {
-        private UsersSystem _usersSystem;
-        private GamesSystem _gamesSystem;
+        private readonly UsersSystem _usersSystem;
+        private readonly GamesSystem _gamesSystem;
 
         public ServerLogic(UsersSystem? usersSystem = null, GamesSystem? gamesSystem = null)
         {
@@ -16,9 +16,9 @@ namespace TPUM.Server.Logic
             _gamesSystem = gamesSystem ?? new GamesSystem();
         }
 
-        public bool Login(string userName, string password)
+        public bool Login(UserDTO user)
         {
-            throw new NotImplementedException();
+            return _usersSystem.CheckIfExists(user);
         }
 
         public void Logout(int tokenID)

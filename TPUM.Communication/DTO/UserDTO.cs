@@ -5,7 +5,7 @@ namespace TPUM.Communication.DTO
 {
     public class UserDTO
     {
-        public UserDTO(Guid id, string username, string password, List<GameDTO> favouriteGames)
+        public UserDTO(Guid id, string username, string password, List<GameDTO>? favouriteGames)
         {
             ID = id;
             Username = username;
@@ -16,7 +16,7 @@ namespace TPUM.Communication.DTO
         public Guid ID { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-        public List<GameDTO> FavouriteGames { get; set; }
+        public List<GameDTO>? FavouriteGames { get; set; }
 
         public override string ToString() => Username;
     }

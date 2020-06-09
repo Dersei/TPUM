@@ -28,6 +28,7 @@ namespace TPUM.Logic.Mapping
 
         public static IEnumerable<Game> MapGameCollection(IEnumerable<GameDTO> games)
         {
+            if(games is null) yield break;
             foreach (GameDTO game in games)
             {
                 yield return game.ToGame();
@@ -36,6 +37,7 @@ namespace TPUM.Logic.Mapping
 
         public static IEnumerable<User> MapUserCollection(IEnumerable<UserDTO> users)
         {
+            if (users is null) yield break;
             foreach (UserDTO user in users)
             {
                 yield return user.ToUser();
@@ -46,7 +48,7 @@ namespace TPUM.Logic.Mapping
 
         public static User MapUser(UserDTO user)
         {
-            return new User(user.Username, user.Password, MapGameCollection(user.FavouriteGames).ToList());
+            return new User(user.Username, user.Password, MapGameCollection(user.FavouriteGames)?.ToList() ?? new List<Game>());
         }
 
         public static User ToUser(this UserDTO user) => MapUser(user);

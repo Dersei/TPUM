@@ -63,5 +63,15 @@ namespace TPUM.Data.Repositories
             game.Genres = newGame.Genres;
             return true;
         }
+
+        public bool Exists(Guid id)
+        {
+            return _dataContext.Games.Any(u => u.ID == id);
+        }
+
+        public bool Exists(Game game)
+        {
+            return _dataContext.Games.Contains(game);
+        }
     }
 }

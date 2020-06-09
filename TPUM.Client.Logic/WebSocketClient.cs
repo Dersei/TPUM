@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
@@ -11,14 +12,14 @@ namespace TPUM.Client.Logic
     {
         #region API
 
-        public static async Task<WebSocketConnection> Connect(Uri peer, Action<string> log)
+        public static async Task<WebSocketConnection> Connect(Uri peer, Action<string>? log)
         {
             ClientWebSocket clientWebSocket = new ClientWebSocket();
             await clientWebSocket.ConnectAsync(peer, CancellationToken.None);
             switch (clientWebSocket.State)
             {
                 case WebSocketState.Open:
-                    log($"Opening WebSocket connection to remote server {peer}");
+                    log?.Invoke($"Opening WebSocket connection to remote server {peer}");
                     WebSocketConnection socket = new ClientWebSocketConnection(clientWebSocket, peer, log);
                     return socket;
 
@@ -34,11 +35,11 @@ namespace TPUM.Client.Logic
 
         private class ClientWebSocketConnection : WebSocketConnection
         {
-            public ClientWebSocketConnection(ClientWebSocket clientWebSocket, Uri peer, Action<string> log)
+            public ClientWebSocketConnection(ClientWebSocket clientWebSocket, Uri peer, Action<string>? log)
             {
                 _clientWebSocket = clientWebSocket;
                 _peer = peer;
-                _log = log;
+                _log = log ?? (s => Debug.WriteLine(s));
                 Task.Factory.StartNew(ClientMessageLoop);
             }
             public override bool IsClosed => _clientWebSocket.State == WebSocketState.Closed;

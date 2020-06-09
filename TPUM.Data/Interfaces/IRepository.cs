@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using TPUM.Data.Model;
 
 namespace TPUM.Data.Interfaces
@@ -15,5 +14,7 @@ namespace TPUM.Data.Interfaces
         IEnumerable<T> GetAll();
         IEnumerable<T> GetAll(Func<T, bool> filter);
         bool Update(Guid id, T newItem);
+        bool Exists(Guid id);
+        bool Exists(T item);
     }
 }
