@@ -58,7 +58,6 @@ namespace TPUM.Data.Repositories
             if (user is null) return false;
             user.Username = newUser.Username;
             user.Password = newUser.Password;
-            user.FavouriteGames = user.FavouriteGames;
             return true;
         }
 

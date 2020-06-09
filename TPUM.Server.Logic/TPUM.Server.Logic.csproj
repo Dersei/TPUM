@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TPUM.Communication\TPUM.Communication.csproj" />
     <ProjectReference Include="..\TPUM.Logic\TPUM.Logic.csproj" />
   </ItemGroup>
 

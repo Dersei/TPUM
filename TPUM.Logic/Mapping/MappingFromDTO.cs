@@ -17,10 +17,7 @@ namespace TPUM.Logic.Mapping
             return new Game(game.Title, MapPublisherDTO(game.Publisher), game.Rating, game.Premiere, game.Genres);
         }
 
-        public static User MapUserDTO(UserDTO user)
-        {
-            return new User(user.Username, user.Password, user.FavouriteGames.ToGames().ToList());
-        }
+
 
         public static Publisher ToPublisher(this PublisherDTO publisher) => MapPublisherDTO(publisher);
 
@@ -48,7 +45,7 @@ namespace TPUM.Logic.Mapping
 
         public static User MapUser(UserDTO user)
         {
-            return new User(user.Username, user.Password, MapGameCollection(user.FavouriteGames)?.ToList() ?? new List<Game>());
+            return new User(user.Username, user.Password);
         }
 
         public static User ToUser(this UserDTO user) => MapUser(user);

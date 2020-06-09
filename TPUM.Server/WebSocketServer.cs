@@ -85,15 +85,15 @@ namespace TPUM.Server
                 {
                     if (_webSocket.State == WebSocketState.Closed || _webSocket.State == WebSocketState.Aborted)
                     {
-                        onError?.Invoke();
-                        onClose?.Invoke();
+                        OnError?.Invoke();
+                        OnClose?.Invoke();
                         return;
                     }
                     ArraySegment<byte> segments = new ArraySegment<byte>(buffer);
                     WebSocketReceiveResult receiveResult = await ws.ReceiveAsync(segments, CancellationToken.None);
                     if (receiveResult.MessageType == WebSocketMessageType.Close)
                     {
-                        onClose?.Invoke();
+                        OnClose?.Invoke();
                         await ws.CloseAsync(WebSocketCloseStatus.NormalClosure, "I am closing", CancellationToken.None);
                         return;
                     }
@@ -111,7 +111,7 @@ namespace TPUM.Server
                     //    count += receiveResult.Count;
                     //}
                     string message = Encoding.UTF8.GetString(buffer, 0, count);
-                    onMessage?.Invoke(message);
+                    OnMessage?.Invoke(message);
                 }
             }
         }

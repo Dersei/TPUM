@@ -12,25 +12,10 @@ namespace TPUM.Logic.Systems
 {
     public class PublishersSystem : IReportable
     {
-        private static PublishersSystem? _instance;
-
-        private static readonly object InstanceLock = new object();
-
-        public static PublishersSystem Instance
-        {
-            get
-            {
-                lock (InstanceLock)
-                {
-                    _instance ??= new PublishersSystem();
-                }
-                return _instance;
-            }
-        }
-
+        
         private readonly IRepository<Publisher> _repository;
 
-        private PublishersSystem()
+        public PublishersSystem()
         {
             _repository = new PublisherRepository(DataContext.Instance.FillData(new TestDataFiller()));
         }
@@ -38,7 +23,6 @@ namespace TPUM.Logic.Systems
         public PublishersSystem(IRepository<Publisher> repository)
         {
             _repository = repository;
-            _instance = this;
         }
 
         public PublisherDTO GetGame(Guid id)

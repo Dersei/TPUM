@@ -1,41 +1,35 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using TPUM.Communication;
-using TPUM.Communication.Requests;
-using TPUM.Communication.Responses;
-using TPUM.Serialization;
-using TPUM.Server.Logic;
+using TPUM.Communication.DTO;
 
 namespace TPUM.Server
 {
     internal class Program
     {
-        private static readonly IServerLogic ServerLogic = new ServerLogic();
+       
         private static async Task Main()
         {
             bool exit = false;
-            Dictionary<int, WebSocketConnection> allConnections = new Dictionary<int, WebSocketConnection>();
 
-            Task webSocketServer = WebSocketServer.Server(8081,
+            await WebSocketServer.Server(8081,
                 connection =>
                 {
-                    connection.onMessage = async s =>
+                    connection.OnMessage = async s =>
                     {
-                        
-                        string response = ProcessData(s);
+                        string response = ServerProcessing.ProcessData(s, connection);
                         if (response != null)
                         {
                             Console.WriteLine("Sending response");
                             await connection.SendAsync(response);
                         }
                     };
-                    connection.onError = () =>
+                    connection.OnError = () =>
                     {
                         Console.WriteLine("Error occured");
                         exit = true;
                     };
-                    connection.onClose = () => Console.WriteLine("Closing");
+                    connection.OnClose = () => Console.WriteLine("Closing");
                 });
             do
             {
@@ -43,47 +37,12 @@ namespace TPUM.Server
                 if (command?.ToLower() == "exit")
                     exit = true;
             } while (!exit);
-            foreach (WebSocketConnection connection in allConnections.Values)
+            foreach ((UserDTO user, WebSocketConnection connection) value in ServerProcessing.LoggedInUsers.Values)
             {
-                await connection.DisconnectAsync();
+                await value.connection.DisconnectAsync();
             }
         }
 
-        private static string ProcessData(string data)
-        {
-            Interchange? interchange = Serializer.Deserialize<Interchange>(data);
-            if (interchange is null)
-            {
-                Console.WriteLine($"[{ DateTime.Now:HH: mm: ss.fff}] Nieprawidłowe zapytanie ");
-                return GetStatusFail();
-            }
-            Console.WriteLine($"[{DateTime.Now:HH:mm:ss.fff}] Serwer otrzymał zapytanie od klienta, status: {interchange.Status}");
-
-            return interchange switch
-            {
-                RequestCreateGame rcg => ProcessRequestCreateGame(rcg),
-                RequestLogIn rli => ProcessRequestLogIn(rli),
-                _ => GetStatusFail(),
-            };
-        }
-
-        private static string ProcessRequestCreateGame(RequestCreateGame request)
-        {
-            bool result = ServerLogic?.CreateGame(request.Game) ?? false;
-            Console.WriteLine(request.Game);
-            return Serializer.Serialize(new ResponseCreateGame { Message = "Game adding", CreatedGame = request.Game, Success = result });
-        }
-
-        private static string ProcessRequestLogIn(RequestLogIn request)
-        {
-            bool result = ServerLogic?.Login(request.Credentials) ?? false;
-            Console.WriteLine(request.Credentials);
-            return Serializer.Serialize(new ResponseLogIn { Message = "User logged in", Success = result });
-        }
-
-        private static string GetStatusFail()
-        {
-            return Serializer.Serialize(new Interchange { Status = InterchangeStatus.Fail });
-        }
+        
     }
 }

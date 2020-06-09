@@ -5,17 +5,14 @@ namespace TPUM.Data.Model
 {
     public sealed class User : IdItem, IEquatable<User>
     {
-        public User(string username, string password, List<Game> favouriteGames)
+        public User(string username, string password)
         {
             Username = username;
             Password = password;
-            FavouriteGames = favouriteGames;
         }
 
         public string Username { get; set; }
         public string Password { get; set; }
-        public List<Game> FavouriteGames { get; set; }
-
 
         public bool Equals(User? other)
         {

@@ -1,22 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace TPUM.Communication.DTO
 {
     public class UserDTO
     {
-        public UserDTO(Guid id, string username, string password, List<GameDTO>? favouriteGames)
+        public UserDTO(Guid id, string username, string password)
         {
             ID = id;
             Username = username;
             Password = password;
-            FavouriteGames = favouriteGames;
         }
 
         public Guid ID { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-        public List<GameDTO>? FavouriteGames { get; set; }
 
         public override string ToString() => Username;
     }

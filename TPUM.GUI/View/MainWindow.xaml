@@ -64,11 +64,10 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
-            <TabItem Header="Users">
-                <DataGrid ColumnWidth="*" ItemsSource="{Binding Users, Mode=OneWay}" AutoGenerateColumns="False" SelectedItem="{Binding ChosenGame}">
+            <TabItem Header="Users" IsSelected="{Binding IsOtherUsersSelected, Mode=OneWayToSource}">
+                <DataGrid ColumnWidth="*" ItemsSource="{Binding Users, Mode=OneWay}" AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Title" Binding="{Binding Username, Mode=OneWay}" Width="*" />
-                        <DataGridTextColumn Header="Favourite games" Binding="{Binding FavouriteGames.Count, Mode=OneWay}" Width="*" />
+                        <DataGridTextColumn Header="Username" Binding="{Binding}" Width="*" />
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>

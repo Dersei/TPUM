@@ -12,13 +12,37 @@ namespace TPUM.Client.Logic
 {
     public class ClientLogic : IClientLogic
     {
+
+        private static ClientLogic? _instance;
+
+        private static readonly object InstanceLock = new object();
+
+        public static ClientLogic Instance
+        {
+            get
+            {
+                lock (InstanceLock)
+                {
+                    _instance ??= new ClientLogic();
+                }
+                return _instance;
+            }
+        }
+
+        private ClientLogic()
+        {
+
+        }
+
         private WebSocketConnection _webSocket;
 
-        public Action<bool>? OnLoginResponse { get; set; }
+        public Action<bool, SessionToken>? OnLoginResponse { get; set; }
 
         public Action<bool, GameDTO>? OnCreateGameResponse { get; set; }
 
         public Action<List<GameDTO>>? OnGetAllGamesResponse { get; set; }
+        public Action<List<PublisherDTO>>? OnGetAllPublishersResponse { get; set; }
+        public Action<List<string>>? OnGetOtherUsersResponse { get; set; }
 
         public Action<string>? Log { get; set; }
 
@@ -35,36 +59,50 @@ namespace TPUM.Client.Logic
             task.Wait();
             Log?.Invoke("Connecting...");
             _webSocket = task.Result;
-            _webSocket.onClose = () => Debug.WriteLine("Closing...");
-            _webSocket.onMessage = OnResponse;
+            _webSocket.OnClose = () => Debug.WriteLine("Closing...");
+            _webSocket.OnMessage = OnResponse;
             OnConnect?.Invoke();
         }
 
         private void OnResponse(string message)
         {
             Interchange response = Serializer.Deserialize<Interchange>(message);
-            if (response is ResponseLogIn rli)
+            switch (response)
             {
-                OnLoginResponse?.Invoke(rli.Success);
-            }
-            if (response is ResponseCreateGame r)
-            {
-                OnCreateGameResponse?.Invoke(r.Success, r.CreatedGame);
+                case ResponseLogIn rli:
+                    OnLoginResponse?.Invoke(rli.Success, rli.Token);
+                    break;
+                case ResponseCreateGame r:
+                    OnCreateGameResponse?.Invoke(r.Success, r.CreatedGame);
+                    break;
+                case ResponseLoggedInUsers rliu:
+                    OnGetOtherUsersResponse?.Invoke(rliu.LoggedInUsers);
+                    break;
+                case ResponseGetAllGames rgag:
+                    OnGetAllGamesResponse?.Invoke(rgag.Games);
+                    break;
+                case ResponseGetAllPublishers rgap:
+                    OnGetAllPublishersResponse?.Invoke(rgap.Publishers);
+                    break;
             }
         }
 
         public Task TryLogin(UserDTO user)
         {
-            Interchange interchange = new RequestLogIn()
+            Interchange interchange = new RequestLogIn
             {
                 Credentials = user
             };
             return _webSocket.SendAsync(Serializer.Serialize(interchange));
         }
 
-        public Task Logout()
+        public Task Logout(SessionToken token)
         {
-            throw new NotImplementedException();
+            Interchange interchange = new RequestLogOut
+            {
+                Token = token
+            };
+            return _webSocket.SendAsync(Serializer.Serialize(interchange));
         }
 
         public Task CreateGame(GameDTO game)
@@ -76,9 +114,22 @@ namespace TPUM.Client.Logic
             return _webSocket.SendAsync(Serializer.Serialize(interchange));
         }
 
+        public Task GetOtherUsers()
+        {
+            Interchange interchange = new RequestLoggedInUsers();
+            return _webSocket.SendAsync(Serializer.Serialize(interchange));
+        }
+
         public Task GetAllGames()
         {
-            throw new NotImplementedException();
+            Interchange interchange = new RequestGetAllGames();
+            return _webSocket.SendAsync(Serializer.Serialize(interchange));
+        }
+
+        public Task GetAllPublishers()
+        {
+            Interchange interchange = new RequestGetAllPublishers();
+            return _webSocket.SendAsync(Serializer.Serialize(interchange));
         }
     }
 }

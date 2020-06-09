@@ -29,7 +29,7 @@ namespace TPUM.Logic.Systems
             StringBuilder sb = new StringBuilder(users.Count);
             foreach (User user in users)
             {
-                sb.Append($"User {user.Username} has {user.FavouriteGames.Count} favourite games");
+                sb.Append($"User {user.Username} has 0 favourite games");
                 sb.Append(Environment.NewLine);
             }
 

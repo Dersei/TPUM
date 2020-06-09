@@ -2,6 +2,5 @@
 {
     public class Interchange
     {
-        public InterchangeStatus Status { get; set; } = InterchangeStatus.Success;
     }
 }

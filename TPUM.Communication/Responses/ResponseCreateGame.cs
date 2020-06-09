@@ -4,6 +4,6 @@ namespace TPUM.Communication.Responses
 {
     public class ResponseCreateGame : Response
     {
-        public GameDTO CreatedGame { get; set; }
+        public GameDTO? CreatedGame { get; set; }
     }
 }

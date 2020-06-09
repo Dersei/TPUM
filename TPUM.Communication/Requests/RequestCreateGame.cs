@@ -4,6 +4,6 @@ namespace TPUM.Communication.Requests
 {
     public class RequestCreateGame : Interchange
     {
-        public GameDTO Game { get; set; }
+        public GameDTO? Game { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using TPUM.GUI.ViewModel;
 
 namespace TPUM.GUI.View
 {
@@ -10,6 +11,7 @@ namespace TPUM.GUI.View
         public MainWindow()
         {
             InitializeComponent();
+            Closing += (DataContext as MainViewModel).DoClose;
         }
     }
 }

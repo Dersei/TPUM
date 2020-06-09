@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using TPUM.Data.Interfaces;
 using TPUM.Data.Model;
 
@@ -36,11 +35,12 @@ namespace TPUM.Data
             dc.Games.Add(new Game("Oxenfree", nightSchool, 10, new DateTime(2016, 1, 15),
                 new[] {Genre.Adventure, Genre.WalkingSim}));
             
-            dc.Users.Add(new User("Dersei", "password1234", new List<Game>()));
-            dc.Users.Add(new User("Dealiner", "1234098pass", new List<Game>()));
-            dc.Users.Add(new User("Shepard", "me123Andromeda", new List<Game>()));
-            dc.Users.Add(new User("FHawke", "merrill2", new List<Game>()));
-            dc.Users.Add(new User("SerInq", "bre4ch", new List<Game>()));
+            dc.Users.Add(new User("Dersei", "password1234"));
+            dc.Users.Add(new User("q", "q"));
+            dc.Users.Add(new User("Dealiner", "1234098pass"));
+            dc.Users.Add(new User("Shepard", "me123Andromeda"));
+            dc.Users.Add(new User("FHawke", "merrill2"));
+            dc.Users.Add(new User("SerInq", "bre4ch"));
 
             return dc;
         }

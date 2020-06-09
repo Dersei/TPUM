@@ -9,7 +9,7 @@ namespace TPUM.Logic.Tests
         [Fact]
         public void GetGameTest()
         {
-            PublishersSystem publisherSystem = PublishersSystem.Instance;
+            PublishersSystem publisherSystem = new PublishersSystem();
             Assert.True(publisherSystem.GetAllPublishers().Any());
         }
     }

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Diagnostics;
 using System.Windows.Input;
+using TPUM.Client.Logic;
 using TPUM.Communication.DTO;
 using TPUM.Data.Model;
 using TPUM.GUI.ViewModel.Commands;
-using TPUM.Logic.Systems;
 
 namespace TPUM.GUI.ViewModel
 {
@@ -20,14 +20,25 @@ namespace TPUM.GUI.ViewModel
 
         public ICommand DoCreate { get; }
 
+        public async void GetPublishers()
+        {
+            await ClientLogic.Instance.GetAllPublishers();
+        }
+
         public GameCreationViewModel()
         {
             Title = "";
-            Publisher = PublishersSystem.Instance.GetAllPublishers().ToList();
+            Publisher = new List<PublisherDTO>();
             Rating = 0;
             Premiere = DateTime.Now;
             Genres = new Genre[0];
             DoCreate = new RelayCommand(Create);
+
+            ClientLogic.Instance.OnGetAllPublishersResponse += dtos =>
+            {
+                Publisher = dtos;
+            };
+            GetPublishers();
         }
 
         public GameDTO? CreatedGame { get; private set; }

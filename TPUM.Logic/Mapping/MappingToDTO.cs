@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using TPUM.Communication.DTO;
 using TPUM.Data.Model;
 
@@ -49,7 +48,7 @@ namespace TPUM.Logic.Mapping
 
         public static UserDTO MapUser(User user)
         {
-            return new UserDTO(user.ID, user.Username, user.Password, MapGameCollection(user.FavouriteGames).ToList());
+            return new UserDTO(user.ID, user.Username, user.Password);
         }
 
         public static UserDTO ToUserDTO(this User user) => MapUser(user);

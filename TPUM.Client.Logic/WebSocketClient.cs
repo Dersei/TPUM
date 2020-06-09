@@ -83,7 +83,7 @@ namespace TPUM.Client.Logic
                         WebSocketReceiveResult result = await _clientWebSocket.ReceiveAsync(segment, CancellationToken.None);
                         if (result.MessageType == WebSocketMessageType.Close)
                         {
-                            onClose?.Invoke();
+                            OnClose?.Invoke();
                             await _clientWebSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "I am closing", CancellationToken.None);
                             return;
                         }
@@ -101,7 +101,7 @@ namespace TPUM.Client.Logic
                         //    count += result.Count;
                         //}
                         string message = Encoding.UTF8.GetString(buffer, 0, count);
-                        onMessage?.Invoke(message);
+                        OnMessage?.Invoke(message);
                     }
                 }
                 catch (Exception ex)

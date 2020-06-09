@@ -51,7 +51,7 @@ namespace TPUM.GUI.ViewModel
 
         private void LogIn()
         {
-            UserCredentials = new UserDTO(Guid.Empty, Username, Password, null);
+            UserCredentials = new UserDTO(Guid.Empty, Username, Password);
         }
 
     }
