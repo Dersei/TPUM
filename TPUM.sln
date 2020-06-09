@@ -23,6 +23,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TPUM.Server.Logic", "TPUM.S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TPUM.Client.Logic", "TPUM.Client.Logic\TPUM.Client.Logic.csproj", "{226D4A0B-7A9C-40A7-8877-2AFAA2F5C63C}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TPUM.Client.Tests", "TPUM.Client.Tests\TPUM.Client.Tests.csproj", "{3E3254BF-C396-47AA-B08E-631256D375F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPUM.Server.Tests", "TPUM.Server.Tests\TPUM.Server.Tests.csproj", "{D676B507-A7E5-4689-A018-BAAA500375AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPUM.Communication.Tests", "TPUM.Communication.Tests\TPUM.Communication.Tests.csproj", "{D4C203EB-858C-4D60-8021-54F3631726A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPUM.Serialization.Tests", "TPUM.Serialization.Tests\TPUM.Serialization.Tests.csproj", "{D72ACB4E-3FDE-4A3B-8296-9EC55C8F804B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPUM.Connection.Tests", "TPUM.Connection.Tests\TPUM.Connection.Tests.csproj", "{3515B806-24D1-41CC-85CD-06F15B6A1EE2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +79,26 @@ Global
 		{226D4A0B-7A9C-40A7-8877-2AFAA2F5C63C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{226D4A0B-7A9C-40A7-8877-2AFAA2F5C63C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{226D4A0B-7A9C-40A7-8877-2AFAA2F5C63C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E3254BF-C396-47AA-B08E-631256D375F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E3254BF-C396-47AA-B08E-631256D375F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E3254BF-C396-47AA-B08E-631256D375F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E3254BF-C396-47AA-B08E-631256D375F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D676B507-A7E5-4689-A018-BAAA500375AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D676B507-A7E5-4689-A018-BAAA500375AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D676B507-A7E5-4689-A018-BAAA500375AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D676B507-A7E5-4689-A018-BAAA500375AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4C203EB-858C-4D60-8021-54F3631726A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4C203EB-858C-4D60-8021-54F3631726A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4C203EB-858C-4D60-8021-54F3631726A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4C203EB-858C-4D60-8021-54F3631726A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D72ACB4E-3FDE-4A3B-8296-9EC55C8F804B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D72ACB4E-3FDE-4A3B-8296-9EC55C8F804B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D72ACB4E-3FDE-4A3B-8296-9EC55C8F804B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D72ACB4E-3FDE-4A3B-8296-9EC55C8F804B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3515B806-24D1-41CC-85CD-06F15B6A1EE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3515B806-24D1-41CC-85CD-06F15B6A1EE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3515B806-24D1-41CC-85CD-06F15B6A1EE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3515B806-24D1-41CC-85CD-06F15B6A1EE2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

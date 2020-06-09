@@ -20,22 +20,30 @@ namespace TPUM.Server.Logic
             await Task.WhenAll(WorkPeriodic(), Loop(address, onConnection));
         }
 
+        public void Stop()
+        {
+          
+        }
+
         #endregion API
 
         #region private
 
         private PeriodicTask<string>? _periodic;
         private CancellationTokenSource? _tokenSource;
+        private HttpListener? _server;
+        private bool _shouldStop;
 
         private async Task Loop(Uri uri, Action<WebSocketConnection> onConnection)
         {
             Console.WriteLine("Starting...");
-            HttpListener server = new HttpListener();
-            server.Prefixes.Add(uri.OriginalString);
-            server.Start();
+            _server = new HttpListener();
+            _server.Prefixes.Add(uri.OriginalString);
+            _server.Start();
             while (true)
             {
-                HttpListenerContext hc = await server.GetContextAsync();
+                if (!_server.IsListening || _shouldStop) return;
+                HttpListenerContext hc = await _server.GetContextAsync();
                 if (!hc.Request.IsWebSocketRequest)
                 {
                     hc.Response.StatusCode = 400;

@@ -12,8 +12,9 @@ namespace TPUM.Server.GUI
 {
     public class ServerProcessing
     {
-        private static readonly IServerLogic ServerLogic = new ServerLogic();
+        public static readonly IServerLogic ServerLogic = new ServerLogic();
         public static readonly Dictionary<SessionToken, (UserDTO user, WebSocketConnection connection)> LoggedInUsers = new Dictionary<SessionToken, (UserDTO user, WebSocketConnection connection)>();
+        
         public static string ProcessData(string data, WebSocketConnection connection)
         {
             Interchange? interchange = Serializer.Deserialize<Interchange>(data);
@@ -40,19 +41,19 @@ namespace TPUM.Server.GUI
         {
             LoggedInUsers.Remove(request.Token);
             Console.WriteLine($"Log out {request.Token}");
-            return Serializer.Serialize(new ResponseLogOut() { Message = "Logged out", Success = true });
+            return Serializer.Serialize(new ResponseLogOut { Message = "Logged out", Success = true });
         }
 
         public static string ProcessRequestGetAllPublishers(RequestGetAllPublishers _)
         {
             List<PublisherDTO> publishers = ServerLogic.GetAllPublishers();
-            return Serializer.Serialize(new ResponseGetAllPublishers() { Message = "All games", Publishers = publishers, Success = true });
+            return Serializer.Serialize(new ResponseGetAllPublishers { Message = "All games", Publishers = publishers, Success = true });
         }
 
         public static string ProcessRequestGetAllGames(RequestGetAllGames _)
         {
             List<GameDTO> games = ServerLogic.GetAllGames();
-            return Serializer.Serialize(new ResponseGetAllGames() { Message = "All games", Games = games, Success = true });
+            return Serializer.Serialize(new ResponseGetAllGames { Message = "All games", Games = games, Success = true });
         }
 
         public static string ProcessRequestCreateGame(RequestCreateGame request)
@@ -78,7 +79,7 @@ namespace TPUM.Server.GUI
         public static string ProcessRequestGetLoggedInUsers(RequestLoggedInUsers _)
         {
             List<string> users = LoggedInUsers.Select(i => i.Value.user.Username).ToList();
-            return Serializer.Serialize(new ResponseLoggedInUsers() { Message = "Logged in users", Success = true, LoggedInUsers = users });
+            return Serializer.Serialize(new ResponseLoggedInUsers { Message = "Logged in users", Success = true, LoggedInUsers = users });
         }
 
         public static string GetStatusFail()

@@ -7,9 +7,9 @@ using TPUM.Server.Logic;
 
 namespace TPUM.Server.GUI
 {
-    internal class Program
+    public class Program
     {
-        private static async Task Main()
+        public static async Task Main()
         {
             WebSocketServer server = new WebSocketServer();
             Uri address = new Uri($@"http://localhost:{8081}/");

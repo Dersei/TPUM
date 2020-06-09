@@ -96,7 +96,7 @@ namespace TPUM.Client.Logic
             {
                 Credentials = user
             };
-            return _webSocket?.SendAsync(Serializer.Serialize(interchange)) ?? Task.FromResult(false);
+            return _webSocket?.SendAsync(Serializer.Serialize(interchange)) ?? Task.CompletedTask;
         }
 
         public Task Logout(SessionToken token)
@@ -105,7 +105,7 @@ namespace TPUM.Client.Logic
             {
                 Token = token
             };
-            return _webSocket?.SendAsync(Serializer.Serialize(interchange)) ?? Task.FromResult(false);
+            return _webSocket?.SendAsync(Serializer.Serialize(interchange)) ?? Task.CompletedTask;
         }
 
         public Task CreateGame(GameDTO game)
@@ -114,25 +114,25 @@ namespace TPUM.Client.Logic
             {
                 Game = game
             };
-            return _webSocket?.SendAsync(Serializer.Serialize(interchange)) ?? Task.FromResult(false);
+            return _webSocket?.SendAsync(Serializer.Serialize(interchange)) ?? Task.CompletedTask;
         }
 
         public Task GetOtherUsers()
         {
             Interchange interchange = new RequestLoggedInUsers();
-            return _webSocket?.SendAsync(Serializer.Serialize(interchange)) ?? Task.FromResult(false);
+            return _webSocket?.SendAsync(Serializer.Serialize(interchange)) ?? Task.CompletedTask;
         }
 
         public Task GetAllGames()
         {
             Interchange interchange = new RequestGetAllGames();
-            return _webSocket?.SendAsync(Serializer.Serialize(interchange)) ?? Task.FromResult(false);
+            return _webSocket?.SendAsync(Serializer.Serialize(interchange)) ?? Task.CompletedTask;
         }
 
         public Task GetAllPublishers()
         {
             Interchange interchange = new RequestGetAllPublishers();
-            return _webSocket?.SendAsync(Serializer.Serialize(interchange)) ?? Task.FromResult(false);
+            return _webSocket?.SendAsync(Serializer.Serialize(interchange)) ?? Task.CompletedTask;
         }
     }
 }
