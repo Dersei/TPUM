@@ -20,7 +20,7 @@ namespace TPUM.Server.Tests
             string processingResult = ServerProcessing.ProcessData(stringValue, null!);
             ResponseGetAllGames deserialized = Serializer.Deserialize<ResponseGetAllGames>(processingResult);
             Assert.NotNull(deserialized);
-            Assert.Equal(7, deserialized.Games!.Count);
+            Assert.Equal(8, deserialized.Games!.Count);
         }
 
         [Fact]
