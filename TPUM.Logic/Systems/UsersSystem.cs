@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using TPUM.Communication.DTO;
+using TPUM.Communication.TransferModel;
 using TPUM.Data;
 using TPUM.Data.Interfaces;
 using TPUM.Data.Model;
@@ -40,19 +40,19 @@ namespace TPUM.Logic.Systems
             }
         }
 
-        public UserDTO GetUser(Guid id)
+        //public TransferUser GetUser(Guid id)
+        //{
+        //    lock (_syncObject)
+        //        return _repository.Get(id).ToUserDTO();
+        //}
+
+        public IEnumerable<TransferUser> GetAllUsers()
         {
             lock (_syncObject)
-                return _repository.Get(id).ToUserDTO();
+                return _repository.GetAll().ToTransferUsers();
         }
 
-        public IEnumerable<UserDTO> GetAllUsers()
-        {
-            lock (_syncObject)
-                return _repository.GetAll().ToUserDTOs();
-        }
-
-        public bool CheckIfExists(UserDTO user)
+        public bool CheckIfExists(TransferUser user)
         {
             lock (_syncObject)
                 return _repository.Exists(user.ToUser());

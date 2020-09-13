@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.30028.174
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TPUM.Logic", "TPUM.Logic\TPUM.Logic.csproj", "{A91CEDEC-A88F-4BE1-B3FB-69C082639D80}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TPUM.Data", "TPUM.Data\TPUM.Data.csproj", "{20B82AC8-2FCE-416C-A961-A9B35FABAC13}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TPUM.Client.GUI", "TPUM.Client.GUI\TPUM.Client.GUI.csproj", "{FCDE6720-9F37-4B15-9CA4-87929E592D1C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TPUM.Data.Tests", "TPUM.Data.Tests\TPUM.Data.Tests.csproj", "{70BFB52C-8162-4388-AB7A-65759381C54A}"
@@ -25,13 +23,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TPUM.Client.Logic", "TPUM.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TPUM.Client.Tests", "TPUM.Client.Tests\TPUM.Client.Tests.csproj", "{3E3254BF-C396-47AA-B08E-631256D375F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPUM.Server.Tests", "TPUM.Server.Tests\TPUM.Server.Tests.csproj", "{D676B507-A7E5-4689-A018-BAAA500375AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TPUM.Server.Tests", "TPUM.Server.Tests\TPUM.Server.Tests.csproj", "{D676B507-A7E5-4689-A018-BAAA500375AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPUM.Communication.Tests", "TPUM.Communication.Tests\TPUM.Communication.Tests.csproj", "{D4C203EB-858C-4D60-8021-54F3631726A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TPUM.Communication.Tests", "TPUM.Communication.Tests\TPUM.Communication.Tests.csproj", "{D4C203EB-858C-4D60-8021-54F3631726A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPUM.Serialization.Tests", "TPUM.Serialization.Tests\TPUM.Serialization.Tests.csproj", "{D72ACB4E-3FDE-4A3B-8296-9EC55C8F804B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TPUM.Serialization.Tests", "TPUM.Serialization.Tests\TPUM.Serialization.Tests.csproj", "{D72ACB4E-3FDE-4A3B-8296-9EC55C8F804B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPUM.Connection.Tests", "TPUM.Connection.Tests\TPUM.Connection.Tests.csproj", "{3515B806-24D1-41CC-85CD-06F15B6A1EE2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TPUM.Connection.Tests", "TPUM.Connection.Tests\TPUM.Connection.Tests.csproj", "{3515B806-24D1-41CC-85CD-06F15B6A1EE2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPUM.Client.Data", "TPUM.Client.Data\TPUM.Client.Data.csproj", "{336CBC44-F45D-4D47-8DFB-9E0D80BA56B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPUM.Data", "TPUM.Data\TPUM.Data.csproj", "{1838CE40-FDDC-4C1C-B952-6896E19988BB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,10 +45,6 @@ Global
 		{A91CEDEC-A88F-4BE1-B3FB-69C082639D80}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A91CEDEC-A88F-4BE1-B3FB-69C082639D80}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A91CEDEC-A88F-4BE1-B3FB-69C082639D80}.Release|Any CPU.Build.0 = Release|Any CPU
-		{20B82AC8-2FCE-416C-A961-A9B35FABAC13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{20B82AC8-2FCE-416C-A961-A9B35FABAC13}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{20B82AC8-2FCE-416C-A961-A9B35FABAC13}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{20B82AC8-2FCE-416C-A961-A9B35FABAC13}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FCDE6720-9F37-4B15-9CA4-87929E592D1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FCDE6720-9F37-4B15-9CA4-87929E592D1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FCDE6720-9F37-4B15-9CA4-87929E592D1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -99,6 +97,14 @@ Global
 		{3515B806-24D1-41CC-85CD-06F15B6A1EE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3515B806-24D1-41CC-85CD-06F15B6A1EE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3515B806-24D1-41CC-85CD-06F15B6A1EE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{336CBC44-F45D-4D47-8DFB-9E0D80BA56B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{336CBC44-F45D-4D47-8DFB-9E0D80BA56B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{336CBC44-F45D-4D47-8DFB-9E0D80BA56B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{336CBC44-F45D-4D47-8DFB-9E0D80BA56B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1838CE40-FDDC-4C1C-B952-6896E19988BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1838CE40-FDDC-4C1C-B952-6896E19988BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1838CE40-FDDC-4C1C-B952-6896E19988BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1838CE40-FDDC-4C1C-B952-6896E19988BB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,6 +1,5 @@
 using System;
-using TPUM.Communication.DTO;
-using TPUM.Data.Model;
+using TPUM.Communication.TransferModel;
 using Xunit;
 
 namespace TPUM.Communication.Tests
@@ -26,7 +25,7 @@ namespace TPUM.Communication.Tests
         [Fact]
         public void GameDTOTest()
         {
-            GameDTO game = new GameDTO(Guid.Empty, "TGame", new PublisherDTO(Guid.Empty, "T", "US"), 10, DateTime.Now,
+            TransferGame game = new TransferGame("TGame", new TransferPublisher("T", "US"), 10, DateTime.Now,
                 new[]
                 {
                     Genre.FPS
@@ -38,7 +37,7 @@ namespace TPUM.Communication.Tests
         [Fact]
         public void PublisherDTOTest()
         {
-            PublisherDTO publisher = new PublisherDTO(Guid.Empty, "T", "US");
+            TransferPublisher publisher = new TransferPublisher( "T", "US");
 
             Assert.Equal("T - US", publisher.ToString());
         }

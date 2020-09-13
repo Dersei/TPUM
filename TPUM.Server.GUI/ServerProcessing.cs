@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using TPUM.Communication;
-using TPUM.Communication.DTO;
 using TPUM.Communication.Requests;
 using TPUM.Communication.Responses;
+using TPUM.Communication.TransferModel;
 using TPUM.Serialization;
 using TPUM.Server.Logic;
 
@@ -13,17 +13,17 @@ namespace TPUM.Server.GUI
     public class ServerProcessing
     {
         public static readonly IServerLogic ServerLogic = new ServerLogic();
-        public static readonly Dictionary<SessionToken, (UserDTO user, WebSocketConnection connection)> LoggedInUsers = new Dictionary<SessionToken, (UserDTO user, WebSocketConnection connection)>();
+        public static readonly Dictionary<SessionToken, (TransferUser user, WebSocketConnection connection)> LoggedInUsers = new Dictionary<SessionToken, (TransferUser user, WebSocketConnection connection)>();
         
         public static string ProcessData(string data, WebSocketConnection connection)
         {
             Interchange? interchange = Serializer.Deserialize<Interchange>(data);
             if (interchange is null)
             {
-                Console.WriteLine($"[{ DateTime.Now:HH: mm: ss.fff}] Nieprawidłowe zapytanie ");
+                Console.WriteLine($"[{ DateTime.Now:HH: mm: ss.fff}] Invalid request ");
                 return GetStatusFail();
             }
-            Console.WriteLine($"[{DateTime.Now:HH:mm:ss.fff}] Serwer otrzymał zapytanie od klienta, status: {interchange.Status}");
+            Console.WriteLine($"[{DateTime.Now:HH:mm:ss.fff}] Received request from client, status: {interchange.Status}");
 
             return interchange switch
             {
@@ -46,13 +46,13 @@ namespace TPUM.Server.GUI
 
         public static string ProcessRequestGetAllPublishers(RequestGetAllPublishers _)
         {
-            List<PublisherDTO> publishers = ServerLogic.GetAllPublishers();
+            List<TransferPublisher> publishers = ServerLogic.GetAllPublishers();
             return Serializer.Serialize(new ResponseGetAllPublishers { Message = "All games", Publishers = publishers, Success = true });
         }
 
         public static string ProcessRequestGetAllGames(RequestGetAllGames _)
         {
-            List<GameDTO> games = ServerLogic.GetAllGames();
+            List<TransferGame> games = ServerLogic.GetAllGames();
             return Serializer.Serialize(new ResponseGetAllGames { Message = "All games", Games = games, Success = true });
         }
 

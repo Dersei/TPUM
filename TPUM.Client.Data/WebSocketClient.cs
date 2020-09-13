@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using TPUM.Communication;
 
-namespace TPUM.Client.Logic
+namespace TPUM.Client.Data
 {
     public class WebSocketClient
     {

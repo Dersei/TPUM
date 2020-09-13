@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TPUM.Serialization\TPUM.Serialization.csproj" />
+    <ProjectReference Include="..\TPUM.Communication\TPUM.Communication.csproj" />
   </ItemGroup>
 
 </Project>

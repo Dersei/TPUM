@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
+using TPUM.Client.Data;
+using TPUM.Client.Logic.Mapping;
 using TPUM.Communication;
 using TPUM.Communication.DTO;
 using TPUM.Communication.Requests;
@@ -57,7 +60,7 @@ namespace TPUM.Client.Logic
             {
                 task = _webSocketClient.Connect(address, Log);
             } while (task.Result == null);
-            task.Wait();
+            //task.Wait();
             Log?.Invoke("Connecting...");
             _webSocket = task.Result;
             _webSocket.OnClose = () => Debug.WriteLine("Closing...");
@@ -67,36 +70,56 @@ namespace TPUM.Client.Logic
 
         private WebSocketClient? _webSocketClient;
 
+        private ResponseLogIn? _currentLogInInfo;
+
         private void OnResponse(string message)
         {
             Interchange response = Serializer.Deserialize<Interchange>(message);
             switch (response)
             {
                 case ResponseLogIn rli:
-                    OnLoginResponse?.Invoke(rli.Success, rli.Token);
+                    _currentLogInInfo = rli;
+                    //OnLoginResponse?.Invoke(rli.Success, rli.Token);
                     break;
                 case ResponseCreateGame r:
-                    OnCreateGameResponse?.Invoke(r.Success, r.CreatedGame);
+                    OnCreateGameResponse?.Invoke(r.Success, r.CreatedGame?.ToGameDTO());
                     break;
                 case ResponseLoggedInUsers rliu:
                     OnGetOtherUsersResponse?.Invoke(rliu.LoggedInUsers);
                     break;
                 case ResponseGetAllGames rgag:
-                    OnGetAllGamesResponse?.Invoke(rgag.Games);
+                    OnGetAllGamesResponse?.Invoke(rgag.Games?.ToGameDTOs()?.ToList());
                     break;
                 case ResponseGetAllPublishers rgap:
-                    OnGetAllPublishersResponse?.Invoke(rgap.Publishers);
+                    OnGetAllPublishersResponse?.Invoke(rgap.Publishers?.ToPublisherDTOs()?.ToList());
                     break;
             }
         }
+
+        //public Task TryLogin(UserDTO user)
+        //{
+        //    Interchange interchange = new RequestLogIn
+        //    {
+        //        Credentials = user.ToUser()
+        //    };
+        //    return _webSocket?.SendAsync(Serializer.Serialize(interchange)) ?? Task.CompletedTask;
+        //}
 
         public Task TryLogin(UserDTO user)
         {
             Interchange interchange = new RequestLogIn
             {
-                Credentials = user
+                Credentials = user.ToUser()
             };
-            return _webSocket?.SendAsync(Serializer.Serialize(interchange)) ?? Task.CompletedTask;
+            Task sendingTask = _webSocket?.SendAsync(Serializer.Serialize(interchange)) ?? Task.CompletedTask;
+            sendingTask.Wait();
+            while (_currentLogInInfo == null)
+            {
+                
+            }
+            OnLoginResponse?.Invoke(_currentLogInInfo.Success, _currentLogInInfo.Token);
+            _currentLogInInfo = null;
+            return Task.CompletedTask;
         }
 
         public Task Logout(SessionToken token)
@@ -112,7 +135,7 @@ namespace TPUM.Client.Logic
         {
             Interchange interchange = new RequestCreateGame()
             {
-                Game = game
+                Game = game.ToGame()
             };
             return _webSocket?.SendAsync(Serializer.Serialize(interchange)) ?? Task.CompletedTask;
         }
@@ -134,5 +157,7 @@ namespace TPUM.Client.Logic
             Interchange interchange = new RequestGetAllPublishers();
             return _webSocket?.SendAsync(Serializer.Serialize(interchange)) ?? Task.CompletedTask;
         }
+
+        public WebSocketConnection? GetWebSocketConnection() => _webSocket;
     }
 }

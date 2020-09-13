@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TPUM.Data.Interfaces;
-using TPUM.Data.Model;
+using TPUM.Client.Data.Interfaces;
+using TPUM.Communication.TransferModel;
 
-namespace TPUM.Data.Repositories
+namespace TPUM.Client.Data.Repositories
 {
-    public class GameRepository : IRepository<Game>
+    public class GameRepository : IRepository<TransferGame>
     {
         private readonly DataContext _dataContext;
         private readonly object _lockObject = new object();
@@ -16,38 +16,36 @@ namespace TPUM.Data.Repositories
             _dataContext = dataContext;
         }
 
-        public bool Add(Game game)
+        public bool Add(TransferGame game)
         {
             lock (_lockObject)
             {
                 _dataContext.Games.Add(game);
             }
-            
             return true;
         }
 
-        public bool Remove(Game game)
+        public bool Remove(TransferGame game)
         {
             lock (_lockObject)
             {
                 return _dataContext.Games.Remove(game);
             }
-            
         }
 
 
-        public IEnumerable<Game> GetAll()
+        public IEnumerable<TransferGame> GetAll()
         {
             return _dataContext.Games;
         }
 
-        public IEnumerable<Game> GetAll(Func<Game, bool> filter)
+        public IEnumerable<TransferGame> GetAll(Func<TransferGame, bool> filter)
         {
             return _dataContext.Games.Where(filter);
         }
 
         
-        public bool Exists(Game game)
+        public bool Exists(TransferGame game)
         {
             return _dataContext.Games.Contains(game);
         }

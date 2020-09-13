@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Controls;
-using TPUM.Data.Model;
+using TPUM.Communication.DTO;
 
 namespace TPUM.Client.GUI.Converters
 {

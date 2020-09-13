@@ -1,4 +1,5 @@
-﻿using TPUM.Data.Model;
+﻿using System.Linq;
+using TPUM.Data.Model;
 using TPUM.Data.Repositories;
 using Xunit;
 
@@ -25,7 +26,7 @@ namespace TPUM.Data.Tests
         {
             Publisher publisher = new Publisher("Dontnod", "FR");
             _publisherRepository.Add(publisher);
-            Assert.True(_publisherRepository.Get(publisher.ID) != null);
+            Assert.True(_publisherRepository.GetAll() != null);
         }
 
         [Fact]
@@ -33,17 +34,16 @@ namespace TPUM.Data.Tests
         {
             Publisher publisher = new Publisher("Dontnod", "FR");
             _publisherRepository.Add(publisher);
-            Assert.True(_publisherRepository.Remove(publisher.ID));
+            Assert.True(_publisherRepository.Remove(publisher));
         }
 
         [Fact]
         public void UpdatePublisher()
         {
             Publisher publisher = new Publisher("Dontnod", "FR");
-            Publisher publisher2 = new Publisher("Bioware", "CA");
             _publisherRepository.Add(publisher);
-            Assert.True(_publisherRepository.Update(publisher.ID, publisher2));
-            Publisher publisher3 = _publisherRepository.Get(publisher.ID);
+            Assert.True(_publisherRepository.Exists(publisher));
+            Publisher publisher3 = _publisherRepository.GetAll().First();
             Assert.True(publisher.Equals(publisher3));
         }
     }

@@ -23,5 +23,6 @@ namespace TPUM.Client.Logic
         Task GetAllGames();
         Task GetOtherUsers();
         void Connect(Uri address);
+        WebSocketConnection? GetWebSocketConnection();
     }
 }

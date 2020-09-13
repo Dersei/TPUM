@@ -1,8 +1,9 @@
 ﻿using System;
-using TPUM.Communication.DTO;
+using TPUM.Communication.TransferModel;
 using TPUM.Data.Model;
 using TPUM.Logic.Mapping;
 using Xunit;
+using Genre = TPUM.Data.Model.Genre;
 
 namespace TPUM.Logic.Tests
 {
@@ -13,23 +14,22 @@ namespace TPUM.Logic.Tests
         {
             Game game = new Game("Life is Strange", new Publisher("Dontnod", "FR"), 10, new DateTime(2015, 1, 30),
                 new[] {Genre.Adventure});
-            GameDTO gameDTO = game.ToGameDTO();
+            TransferGame gameDTO = game.ToTransferGame();
             Assert.True(game.Title == gameDTO.Title);
-            Assert.True(game.ID == gameDTO.ID);
         }
 
         [Fact]
         public void PublisherMapTest()
         {
             Publisher publisher = new Publisher("Dontnod", "FR");
-            PublisherDTO publisherDTO = publisher.ToPublisherDTO();
-            Assert.True(publisher.ID == publisherDTO.ID);
+            TransferPublisher publisherDTO = publisher.ToTransferPublisher();
+            Assert.True(publisher.Name == publisherDTO.Name);
         }
 
         [Fact]
         public void PublisherDTOMapTest()
         {
-            PublisherDTO publisherDTO = new PublisherDTO(Guid.Empty, "Dontnod", "FR");
+            TransferPublisher publisherDTO = new TransferPublisher( "Dontnod", "FR");
             Publisher publisher = publisherDTO.ToPublisher();
             Assert.True(publisher.Name == publisherDTO.Name);
             Assert.True(publisher.ID != Guid.Empty);

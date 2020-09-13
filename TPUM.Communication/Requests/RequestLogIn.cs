@@ -1,9 +1,9 @@
-﻿using TPUM.Communication.DTO;
+﻿using TPUM.Communication.TransferModel;
 
 namespace TPUM.Communication.Requests
 {
     public class RequestLogIn : Interchange
     {
-        public UserDTO? Credentials { get; set; }
+        public TransferUser? Credentials { get; set; }
     }
 }

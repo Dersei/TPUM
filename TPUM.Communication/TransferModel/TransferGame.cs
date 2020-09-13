@@ -1,13 +1,11 @@
 ﻿using System;
-using TPUM.Data.Model;
 
-namespace TPUM.Communication.DTO
+namespace TPUM.Communication.TransferModel
 {
-    public class GameDTO
+    public class TransferGame
     {
-        public GameDTO(Guid id, string title, PublisherDTO publisher, decimal rating, DateTime premiere, Genre[]? genres)
+        public TransferGame(string title, TransferPublisher publisher, decimal rating, DateTime premiere, Genre[]? genres)
         {
-            ID = id;
             Title = title;
             Publisher = publisher;
             Rating = rating;
@@ -15,9 +13,8 @@ namespace TPUM.Communication.DTO
             Genres = genres;
         }
 
-        public Guid ID { get; set; }
         public string Title { get; set; }
-        public PublisherDTO Publisher { get; set; }
+        public TransferPublisher Publisher { get; set; }
         public decimal Rating { get; set; }
         public DateTime Premiere { get; set; }
         public Genre[]? Genres { get; set; }

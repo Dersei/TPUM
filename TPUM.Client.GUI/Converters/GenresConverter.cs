@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Data;
-using TPUM.Data.Model;
+using TPUM.Communication.DTO;
 
 namespace TPUM.Client.GUI.Converters
 {

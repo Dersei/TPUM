@@ -1,9 +1,9 @@
-﻿using TPUM.Communication.DTO;
+﻿using TPUM.Communication.TransferModel;
 
 namespace TPUM.Communication.Requests
 {
     public class RequestCreateGame : Interchange
     {
-        public GameDTO? Game { get; set; }
+        public TransferGame? Game { get; set; }
     }
 }

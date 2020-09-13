@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TPUM.Communication;
-using TPUM.Communication.DTO;
+using TPUM.Communication.TransferModel;
 using TPUM.Logic;
 using TPUM.Logic.Systems;
 
@@ -29,7 +29,7 @@ namespace TPUM.Server.Logic
             _fileLogger.Subscribe(_gameSender);
         }
 
-        public bool Login(UserDTO user)
+        public bool Login(TransferUser user)
         {
             return _usersSystem.CheckIfExists(user);
         }
@@ -39,17 +39,17 @@ namespace TPUM.Server.Logic
             throw new NotImplementedException();
         }
 
-        public bool CreateGame(GameDTO game)
+        public bool CreateGame(TransferGame game)
         {
             return _gamesSystem.AddGame(game);
         }
 
-        public List<GameDTO> GetAllGames()
+        public List<TransferGame> GetAllGames()
         {
             return _gamesSystem.GetAllGames().ToList();
         }
 
-        public List<PublisherDTO> GetAllPublishers()
+        public List<TransferPublisher> GetAllPublishers()
         {
             return _publishersSystem.GetAllPublishers().ToList();
         }

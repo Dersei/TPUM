@@ -1,17 +1,13 @@
-﻿using System;
-
-namespace TPUM.Communication.DTO
+﻿namespace TPUM.Communication.TransferModel
 {
-    public class PublisherDTO
+    public class TransferPublisher
     {
-        public PublisherDTO(Guid id, string name, string country)
+        public TransferPublisher(string name, string country)
         {
-            ID = id;
             Name = name;
             Country = country;
         }
 
-        public Guid ID { get; set; }
         public string Name { get; set; }
         public string Country { get; set; }
 

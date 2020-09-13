@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using TPUM.Communication.DTO;
+using TPUM.Communication.TransferModel;
 
 namespace TPUM.Communication.Responses
 {
     public class ResponseGetAllPublishers : Response
     {
-        public List<PublisherDTO>? Publishers { get; set; }
+        public List<TransferPublisher>? Publishers { get; set; }
     }
 }

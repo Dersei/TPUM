@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using TPUM.Communication.DTO;
+using TPUM.Communication.TransferModel;
 using TPUM.Data;
 using TPUM.Data.Interfaces;
 using TPUM.Data.Model;
@@ -23,23 +23,23 @@ namespace TPUM.Logic.Systems
 
         public GamesSystem(IRepository<Game> repository) => _repository = repository;
 
-        public GameDTO GetGame(Guid id)
+        //public TransferGame GetGame(Guid id)
+        //{
+        //    lock (_syncObject)
+        //        return _repository.Get(id).ToGameDTO();
+        //}
+
+        public IEnumerable<TransferGame> GetAllGames()
         {
             lock (_syncObject)
-                return _repository.Get(id).ToGameDTO();
+                return _repository.GetAll().ToTransferGames();
         }
 
-        public IEnumerable<GameDTO> GetAllGames()
-        {
-            lock (_syncObject)
-                return _repository.GetAll().ToGameDTOs();
-        }
-
-        public bool AddGame(GameDTO game)
+        public bool AddGame(TransferGame game)
         {
             lock (_syncObject)
             {
-                if (_repository.Add(MappingFromDTO.MapGameDTO(game)))
+                if (_repository.Add(MappingFromTransfer.MapGame(game)))
                 {
                     _counter++;
                     return true;

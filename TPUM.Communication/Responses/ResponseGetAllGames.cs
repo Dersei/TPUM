@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using TPUM.Communication.DTO;
+using TPUM.Communication.TransferModel;
 
 namespace TPUM.Communication.Responses
 {
     public class ResponseGetAllGames : Response
     {
-        public List<GameDTO>? Games { get; set; }
+        public List<TransferGame>? Games { get; set; }
     }
 }

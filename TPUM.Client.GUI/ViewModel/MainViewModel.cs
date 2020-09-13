@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,6 +15,8 @@ using TPUM.Client.GUI.ViewModel.Commands;
 using TPUM.Client.Logic;
 using TPUM.Communication;
 using TPUM.Communication.DTO;
+using System.Reactive;
+using System.Reactive.Linq;
 
 namespace TPUM.Client.GUI.ViewModel
 {
@@ -71,6 +74,10 @@ namespace TPUM.Client.GUI.ViewModel
 
         private IClientLogic? _clientLogic;
 
+        private ReactiveService? _reactiveService;
+        private IObservable<EventPattern<ReactiveService.ReactiveEventArgs>>? _tickObservable;
+        private IDisposable? _reactiveObserver;
+
         private void RunDispatcher(Action action)
         {
             Application.Current.Dispatcher.Invoke(action);
@@ -120,7 +127,7 @@ namespace TPUM.Client.GUI.ViewModel
                 if (dtos is null) return;
                 RunDispatcher(() =>
                 {
-                    foreach (GameDTO s in dtos)
+                    foreach (GameDTO s in dtos.Except(Games))
                     {
                         Games.Add(s);
                     }
@@ -146,6 +153,21 @@ namespace TPUM.Client.GUI.ViewModel
             Connect();
             CreateView(typeof(UserLoginWindow));
             _clientLogic?.GetAllGames();
+            SetupReactiveService();
+        }
+
+        private void SetupReactiveService()
+        {
+            _reactiveService = new ReactiveService(TimeSpan.FromMinutes(1));
+            _tickObservable = Observable.FromEventPattern<ReactiveService.ReactiveEventArgs>(_reactiveService, "Tick");
+            _reactiveObserver = _tickObservable.Subscribe(test => UpdateGamesList());
+            _reactiveService.Start();
+        }
+
+        private async void UpdateGamesList()
+        {
+            if (_clientLogic is null) return;
+            await _clientLogic.GetAllGames();
         }
 
         private void Close(object sender, CancelEventArgs e)
@@ -203,6 +225,15 @@ namespace TPUM.Client.GUI.ViewModel
             if (!Games.Contains(game))
             {
                 _clientLogic?.CreateGame(game);
+            }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _reactiveService?.Dispose();
+                _reactiveObserver?.Dispose();
             }
         }
     }

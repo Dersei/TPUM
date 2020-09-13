@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TPUM.Data.Interfaces
+namespace TPUM.Client.Data.Interfaces
 {
     public interface IRepository<T>
     {

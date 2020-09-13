@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using TPUM.Communication.DTO;
+using TPUM.Communication.TransferModel;
 using TPUM.Data;
 using TPUM.Data.Interfaces;
 using TPUM.Data.Model;
@@ -26,16 +26,10 @@ namespace TPUM.Logic.Systems
             _repository = repository;
         }
 
-        public PublisherDTO GetGame(Guid id)
+        public IEnumerable<TransferPublisher> GetAllPublishers()
         {
             lock (_syncObject)
-                return _repository.Get(id).ToPublisherDTO();
-        }
-
-        public IEnumerable<PublisherDTO> GetAllPublishers()
-        {
-            lock (_syncObject)
-                return _repository.GetAll().ToPublisherDTOs();
+                return _repository.GetAll().ToTransferPublishers();
         }
 
         public string CreateReport()

@@ -15,7 +15,7 @@ namespace TPUM.Logic
         }
 
         public TimeSpan Period { get; }
-        private Func<T> _function;
+        private readonly Func<T> _function;
 
         public async IAsyncEnumerable<T> Start([EnumeratorCancellation] CancellationToken token = default, Func<T>? cancellationFunc = default)
         {

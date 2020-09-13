@@ -6,7 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TPUM.Communication\TPUM.Communication.csproj" />
+    <PackageReference Include="System.Reactive" Version="4.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TPUM.Client.Data\TPUM.Client.Data.csproj" />
   </ItemGroup>
 
 </Project>

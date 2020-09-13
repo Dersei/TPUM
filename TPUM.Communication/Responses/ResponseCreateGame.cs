@@ -1,9 +1,9 @@
-﻿using TPUM.Communication.DTO;
+﻿using TPUM.Communication.TransferModel;
 
 namespace TPUM.Communication.Responses
 {
     public class ResponseCreateGame : Response
     {
-        public GameDTO? CreatedGame { get; set; }
+        public TransferGame? CreatedGame { get; set; }
     }
 }

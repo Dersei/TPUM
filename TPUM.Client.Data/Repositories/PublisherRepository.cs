@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TPUM.Data.Interfaces;
-using TPUM.Data.Model;
+using TPUM.Client.Data.Interfaces;
+using TPUM.Communication.TransferModel;
 
-namespace TPUM.Data.Repositories
+namespace TPUM.Client.Data.Repositories
 {
-    public class PublisherRepository : IRepository<Publisher>
+    public class PublisherRepository : IRepository<TransferPublisher>
     {
         private readonly DataContext _dataContext;
         private readonly object _lockObject = new object();
@@ -16,37 +16,35 @@ namespace TPUM.Data.Repositories
             _dataContext = dataContext;
         }
 
-        public bool Add(Publisher publisher)
+        public bool Add(TransferPublisher publisher)
         {
             lock (_lockObject)
             {
                 _dataContext.Publishers.Add(publisher);
             }
-            
             return true;
         }
 
-        public bool Remove(Publisher publisher)
+        public bool Remove(TransferPublisher publisher)
         {
             lock (_lockObject)
             {
                 return _dataContext.Publishers.Remove(publisher);
             }
-            
         }
 
 
-        public IEnumerable<Publisher> GetAll()
+        public IEnumerable<TransferPublisher> GetAll()
         {
             return _dataContext.Publishers;
         }
 
-        public IEnumerable<Publisher> GetAll(Func<Publisher, bool> filter)
+        public IEnumerable<TransferPublisher> GetAll(Func<TransferPublisher, bool> filter)
         {
             return _dataContext.Publishers.Where(filter);
         }
 
-        public bool Exists(Publisher publisher)
+        public bool Exists(TransferPublisher publisher)
         {
             return _dataContext.Publishers.Contains(publisher);
         }

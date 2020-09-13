@@ -4,7 +4,6 @@ using System.Windows.Input;
 using TPUM.Client.GUI.ViewModel.Commands;
 using TPUM.Client.Logic;
 using TPUM.Communication.DTO;
-using TPUM.Data.Model;
 
 namespace TPUM.Client.GUI.ViewModel
 {
@@ -105,7 +104,7 @@ namespace TPUM.Client.GUI.ViewModel
 
         private void Create()
         {
-            CreatedGame = new GameDTO(Guid.Empty, Title, SelectedPublisher, Rating, Premiere, Genres);
+            CreatedGame = new GameDTO(Title, SelectedPublisher, Rating, Premiere, Genres);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using TPUM.Data.Model;
 using TPUM.Data.Repositories;
 using Xunit;
@@ -28,7 +29,7 @@ namespace TPUM.Data.Tests
             Game game = new Game("Life is Strange", new Publisher("Dontnod", "F"), 10, new DateTime(2015, 1, 30),
                 new[] {Genre.Adventure});
             _gameRepository.Add(game);
-            Assert.True(_gameRepository.Get(game.ID) != null);
+            Assert.True(_gameRepository.GetAll() != null);
         }
 
         [Fact]
@@ -37,7 +38,7 @@ namespace TPUM.Data.Tests
             Game game = new Game("Life is Strange", new Publisher("Dontnod", "F"), 10, new DateTime(2015, 1, 30),
                 new[] {Genre.Adventure});
             _gameRepository.Add(game);
-            Assert.True(_gameRepository.Remove(game.ID));
+            Assert.True(_gameRepository.Remove(game));
         }
 
         [Fact]
@@ -45,11 +46,9 @@ namespace TPUM.Data.Tests
         {
             Game game = new Game("Life is Strange", new Publisher("Dontnod", "F"), 10, new DateTime(2015, 1, 30),
                 new[] { Genre.Adventure });
-            Game game2 = new Game("Dragon Age 2", new Publisher("Bioware", "CA"), 10, new DateTime(2011, 3, 8),
-                new[] { Genre.RPG });
             _gameRepository.Add(game);
-            Assert.True(_gameRepository.Update(game.ID, game2));
-            Game game3 = _gameRepository.Get(game.ID);
+            Assert.True(_gameRepository.Exists(game));
+            Game game3 = _gameRepository.GetAll().First();
             Assert.True(game.Equals(game3));
         }
     }

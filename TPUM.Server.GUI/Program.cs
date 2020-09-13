@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using TPUM.Communication;
-using TPUM.Communication.DTO;
+using TPUM.Communication.TransferModel;
 using TPUM.Logic;
 using TPUM.Server.Logic;
 
@@ -20,7 +20,7 @@ namespace TPUM.Server.GUI
                 _shouldExit = Console.ReadLine()?.ToLower() == "exit";
             } while (!_shouldExit);
 
-            foreach ((UserDTO user, WebSocketConnection connection) value in ServerProcessing.LoggedInUsers.Values)
+            foreach ((TransferUser user, WebSocketConnection connection) value in ServerProcessing.LoggedInUsers.Values)
             {
                 await value.connection.DisconnectAsync();
             }

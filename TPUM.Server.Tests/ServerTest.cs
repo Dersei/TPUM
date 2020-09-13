@@ -1,9 +1,8 @@
 using System;
 using TPUM.Communication;
-using TPUM.Communication.DTO;
 using TPUM.Communication.Requests;
 using TPUM.Communication.Responses;
-using TPUM.Data.Model;
+using TPUM.Communication.TransferModel;
 using TPUM.Serialization;
 using TPUM.Server.GUI;
 using Xunit;
@@ -28,7 +27,7 @@ namespace TPUM.Server.Tests
         {
             RequestLogIn value = new RequestLogIn
             {
-                Credentials = new UserDTO(Guid.Empty, "q", "q")
+                Credentials = new TransferUser(Guid.Empty, "q", "q")
             };
             string stringValue = Serializer.Serialize(value);
             string processingResult = ServerProcessing.ProcessData(stringValue, null!);
@@ -42,7 +41,7 @@ namespace TPUM.Server.Tests
         {
             RequestCreateGame value = new RequestCreateGame()
             {
-                Game = new GameDTO(Guid.Empty, "TGame", new PublisherDTO(Guid.Empty, "T", "US"), 10, DateTime.Now, new[]
+                Game = new TransferGame("TGame", new TransferPublisher("T", "US"), 10, DateTime.Now, new[]
                     {
                         Genre.FPS
                     })
