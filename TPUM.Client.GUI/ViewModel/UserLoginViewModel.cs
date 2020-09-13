@@ -51,7 +51,7 @@ namespace TPUM.Client.GUI.ViewModel
 
         private void LogIn()
         {
-            UserCredentials = new UserDTO(Guid.Empty, Username, Password);
+            UserCredentials = new UserDTO(Guid.NewGuid().GetHashCode(), Username, Password);
         }
 
     }

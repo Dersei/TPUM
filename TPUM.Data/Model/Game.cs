@@ -2,16 +2,19 @@
 
 namespace TPUM.Data.Model
 {
-    public sealed class Game : IdItem, IEquatable<Game>
+    public sealed class Game : IEquatable<Game>
     {
         public Game(string title, Publisher publisher, decimal rating, DateTime premiere, Genre genres)
         {
+            ID = Guid.NewGuid().GetHashCode();
             Title = title;
             Publisher = publisher;
             Rating = rating;
             Genres = genres;
             Premiere = premiere;
         }
+
+        public int ID { get; }
 
         public string Title { get; set; }
         public Publisher Publisher { get; set; }

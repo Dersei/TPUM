@@ -3,14 +3,16 @@ using System.Collections.Generic;
 
 namespace TPUM.Data.Model
 {
-    public sealed class User : IdItem, IEquatable<User>
+    public sealed class User : IEquatable<User>
     {
         public User(string username, string password)
         {
+            ID = Guid.NewGuid().GetHashCode();
             Username = username;
             Password = password;
         }
 
+        public int ID { get; }
         public string Username { get; set; }
         public string Password { get; set; }
 

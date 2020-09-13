@@ -35,12 +35,12 @@ namespace TPUM.Client.Data
             dc.Games.Add(new TransferGame("Oxenfree", nightSchool, 10, new DateTime(2016, 1, 15),
                 (uint)(Genre.Adventure | Genre.WalkingSim)));
 
-            dc.Users.Add(new TransferUser(Guid.NewGuid(), "Dersei", "password1234"));
-            dc.Users.Add(new TransferUser(Guid.NewGuid(), "q", "q"));
-            dc.Users.Add(new TransferUser(Guid.NewGuid(), "Dealiner", "1234098pass"));
-            dc.Users.Add(new TransferUser(Guid.NewGuid(), "Shepard", "me123Andromeda"));
-            dc.Users.Add(new TransferUser(Guid.NewGuid(), "FHawke", "merrill2"));
-            dc.Users.Add(new TransferUser(Guid.NewGuid(), "SerInq", "bre4ch"));
+            dc.Users.Add(new TransferUser(1, "Dersei", "password1234"));
+            dc.Users.Add(new TransferUser(2, "q", "q"));
+            dc.Users.Add(new TransferUser(3, "Dealiner", "1234098pass"));
+            dc.Users.Add(new TransferUser(4, "Shepard", "me123Andromeda"));
+            dc.Users.Add(new TransferUser(5, "FHawke", "merrill2"));
+            dc.Users.Add(new TransferUser(6, "SerInq", "bre4ch"));
 
             return dc;
         }

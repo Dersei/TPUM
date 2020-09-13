@@ -2,14 +2,16 @@
 
 namespace TPUM.Data.Model
 {
-    public sealed class Publisher : IdItem, IEquatable<Publisher>
+    public sealed class Publisher : IEquatable<Publisher>
     {
         public Publisher(string name, string country)
         {
+            ID = Guid.NewGuid().GetHashCode();
             Name = name;
             Country = country;
         }
 
+        public int ID { get; }
         public string Name { get; set; }
         public string Country { get; set; }
 

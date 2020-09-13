@@ -27,7 +27,7 @@ namespace TPUM.Server.Tests
         {
             RequestLogIn value = new RequestLogIn
             {
-                Credentials = new TransferUser(Guid.Empty, "q", "q")
+                Credentials = new TransferUser(0, "q", "q")
             };
             string stringValue = Serializer.Serialize(value);
             string processingResult = ServerProcessing.ProcessData(stringValue, null!);

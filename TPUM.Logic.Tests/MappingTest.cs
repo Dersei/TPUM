@@ -32,7 +32,6 @@ namespace TPUM.Logic.Tests
             TransferPublisher publisherDTO = new TransferPublisher( "Dontnod", "FR");
             Publisher publisher = publisherDTO.ToPublisher();
             Assert.True(publisher.Name == publisherDTO.Name);
-            Assert.True(publisher.ID != Guid.Empty);
         }
     }
 }
