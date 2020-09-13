@@ -14,7 +14,7 @@ namespace TPUM.Client.GUI.ViewModel
         private PublisherDTO? _selectedPublisher;
         private decimal _rating;
         private DateTime _premiere;
-        private Genre[]? _genres;
+        private Genre _genres;
 
         public ICommand DoCreate { get; }
 
@@ -29,7 +29,7 @@ namespace TPUM.Client.GUI.ViewModel
             Publisher = new List<PublisherDTO>();
             Rating = 0;
             Premiere = DateTime.Now;
-            Genres = new Genre[0];
+            Genres = 0;
             DoCreate = new RelayCommand(Create);
 
             ClientLogic.Instance.OnGetAllPublishersResponse += dtos =>
@@ -92,7 +92,7 @@ namespace TPUM.Client.GUI.ViewModel
             }
         }
 
-        public Genre[] Genres
+        public Genre Genres
         {
             get => _genres!;
             set

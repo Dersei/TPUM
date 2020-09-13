@@ -14,20 +14,20 @@ namespace TPUM.Client.Logic.Mapping
         
         public static TransferGame MapGameDTO(GameDTO game)
         {
-            return new TransferGame(game.Title, MapPublisherDTO(game.Publisher), game.Rating, game.Premiere, ToTransferGenres(game.Genres));
+            return new TransferGame(game.Title, MapPublisherDTO(game.Publisher), game.Rating, game.Premiere, (uint)game.Genres);
         }
 
-        public static TPUM.Communication.TransferModel.Genre[]? ToTransferGenres(Genre[]? genres)
-        {
-            if (genres is null) return null;
-            TPUM.Communication.TransferModel.Genre[] targets = new TPUM.Communication.TransferModel.Genre[genres.Length];
-            for (int i = 0; i < targets.Length; i++)
-            {
-                targets[i] = (TPUM.Communication.TransferModel.Genre) genres[i];
-            }
+        //public static TPUM.Communication.TransferModel.Genre[]? ToTransferGenres(Genre[]? genres)
+        //{
+        //    if (genres is null) return null;
+        //    TPUM.Communication.TransferModel.Genre[] targets = new TPUM.Communication.TransferModel.Genre[genres.Length];
+        //    for (int i = 0; i < targets.Length; i++)
+        //    {
+        //        targets[i] = (TPUM.Communication.TransferModel.Genre) genres[i];
+        //    }
 
-            return targets;
-        }
+        //    return targets;
+        //}
 
         public static TransferPublisher ToPublisher(this PublisherDTO publisher) => MapPublisherDTO(publisher);
 

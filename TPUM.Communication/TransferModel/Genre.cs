@@ -1,14 +1,17 @@
-﻿namespace TPUM.Communication.TransferModel
+﻿using System;
+
+namespace TPUM.Communication.TransferModel
 {
-    public enum Genre
+    [Flags]
+    public enum Genre : uint
     {
-        RPG,
-        FPS,
-        RTS,
-        WalkingSim,
-        Adventure,
-        TPS,
-        ImmersiveSim,
-        Action
+        RPG = 1,
+        FPS = 2,
+        RTS = 4,
+        WalkingSim = 8,
+        Adventure = 16,
+        TPS = 32,
+        ImmersiveSim = 64,
+        Action = 128
     }
 }

@@ -4,7 +4,7 @@ namespace TPUM.Communication.TransferModel
 {
     public class TransferGame
     {
-        public TransferGame(string title, TransferPublisher publisher, decimal rating, DateTime premiere, Genre[]? genres)
+        public TransferGame(string title, TransferPublisher publisher, decimal rating, DateTime premiere, uint genres)
         {
             Title = title;
             Publisher = publisher;
@@ -17,7 +17,7 @@ namespace TPUM.Communication.TransferModel
         public TransferPublisher Publisher { get; set; }
         public decimal Rating { get; set; }
         public DateTime Premiere { get; set; }
-        public Genre[]? Genres { get; set; }
+        public uint Genres { get; set; }
 
         public override string ToString()
         {

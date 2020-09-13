@@ -25,11 +25,7 @@ namespace TPUM.Communication.Tests
         [Fact]
         public void GameDTOTest()
         {
-            TransferGame game = new TransferGame("TGame", new TransferPublisher("T", "US"), 10, DateTime.Now,
-                new[]
-                {
-                    Genre.FPS
-                });
+            TransferGame game = new TransferGame("TGame", new TransferPublisher("T", "US"), 10, DateTime.Now, (uint)Genre.FPS);
 
             Assert.True(game.ToString().Contains(game.Title) && game.ToString().Contains("Publisher"));
         }
@@ -37,7 +33,7 @@ namespace TPUM.Communication.Tests
         [Fact]
         public void PublisherDTOTest()
         {
-            TransferPublisher publisher = new TransferPublisher( "T", "US");
+            TransferPublisher publisher = new TransferPublisher("T", "US");
 
             Assert.Equal("T - US", publisher.ToString());
         }

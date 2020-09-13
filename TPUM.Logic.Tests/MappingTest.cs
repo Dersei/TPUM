@@ -13,7 +13,7 @@ namespace TPUM.Logic.Tests
         public void GameMapTest()
         {
             Game game = new Game("Life is Strange", new Publisher("Dontnod", "FR"), 10, new DateTime(2015, 1, 30),
-                new[] {Genre.Adventure});
+                Genre.Adventure);
             TransferGame gameDTO = game.ToTransferGame();
             Assert.True(game.Title == gameDTO.Title);
         }

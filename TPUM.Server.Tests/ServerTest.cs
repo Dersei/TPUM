@@ -41,10 +41,8 @@ namespace TPUM.Server.Tests
         {
             RequestCreateGame value = new RequestCreateGame()
             {
-                Game = new TransferGame("TGame", new TransferPublisher("T", "US"), 10, DateTime.Now, new[]
-                    {
-                        Genre.FPS
-                    })
+                Game = new TransferGame("TGame", new TransferPublisher("T", "US"), 10, DateTime.Now,
+                        (uint)Genre.FPS)
             };
             string stringValue = Serializer.Serialize(value);
             string processingResult = ServerProcessing.ProcessData(stringValue, null!);

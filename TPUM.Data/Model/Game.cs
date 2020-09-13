@@ -4,7 +4,7 @@ namespace TPUM.Data.Model
 {
     public sealed class Game : IdItem, IEquatable<Game>
     {
-        public Game(string title, Publisher publisher, decimal rating, DateTime premiere, Genre[]? genres)
+        public Game(string title, Publisher publisher, decimal rating, DateTime premiere, Genre genres)
         {
             Title = title;
             Publisher = publisher;
@@ -17,7 +17,7 @@ namespace TPUM.Data.Model
         public Publisher Publisher { get; set; }
         public decimal Rating { get; set; }
         public DateTime Premiere { get; set; }
-        public Genre[]? Genres { get; set; }
+        public Genre Genres { get; set; }
 
         public bool Equals(Game? other)
         {

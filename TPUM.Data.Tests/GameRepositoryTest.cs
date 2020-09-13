@@ -20,14 +20,14 @@ namespace TPUM.Data.Tests
         public void AddGame()
         {
             Assert.True(_gameRepository.Add(new Game("Life is Strange", new Publisher("Dontnod", "F"), 10, new DateTime(2015, 1, 30),
-                new[] { Genre.Adventure })));
+                 Genre.Adventure )));
         }
 
         [Fact]
         public void FindGame()
         {
             Game game = new Game("Life is Strange", new Publisher("Dontnod", "F"), 10, new DateTime(2015, 1, 30),
-                new[] {Genre.Adventure});
+                Genre.Adventure);
             _gameRepository.Add(game);
             Assert.True(_gameRepository.GetAll() != null);
         }
@@ -36,7 +36,7 @@ namespace TPUM.Data.Tests
         public void RemoveGame()
         {
             Game game = new Game("Life is Strange", new Publisher("Dontnod", "F"), 10, new DateTime(2015, 1, 30),
-                new[] {Genre.Adventure});
+                Genre.Adventure);
             _gameRepository.Add(game);
             Assert.True(_gameRepository.Remove(game));
         }
@@ -45,7 +45,7 @@ namespace TPUM.Data.Tests
         public void UpdateGame()
         {
             Game game = new Game("Life is Strange", new Publisher("Dontnod", "F"), 10, new DateTime(2015, 1, 30),
-                new[] { Genre.Adventure });
+                Genre.Adventure );
             _gameRepository.Add(game);
             Assert.True(_gameRepository.Exists(game));
             Game game3 = _gameRepository.GetAll().First();
