@@ -26,13 +26,13 @@ namespace TPUM.Data.Repositories
             return true;
         }
 
-        public bool Remove(Game game)
+        public bool Remove(int id)
         {
             lock (_lockObject)
             {
+                Game? game = _dataContext.Games.FirstOrDefault(u => u.ID == id);
                 return _dataContext.Games.Remove(game);
             }
-            
         }
 
 

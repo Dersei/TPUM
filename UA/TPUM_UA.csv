@@ -1,0 +1,15 @@
+TransferGame,31,ObjectType
+TransferGame_ID,32,Variable
+TransferGame_Title,33,Variable
+TransferGame_Rating,34,Variable
+TransferGame_Publisher,35,Variable
+TransferGame_Premiere,36,Variable
+TransferGame_Genres,37,Variable
+TransferPublisher,38,ObjectType
+TransferPublisher_ID,39,Variable
+TransferPublisher_Name,40,Variable
+TransferPublisher_Country,41,Variable
+TransferUser,42,ObjectType
+TransferUser_ID,43,Variable
+TransferUser_Username,44,Variable
+TransferUser_Password,45,Variable

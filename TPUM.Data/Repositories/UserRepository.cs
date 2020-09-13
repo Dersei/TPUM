@@ -26,43 +26,56 @@ namespace TPUM.Data.Repositories
             return true;
         }
 
-        public bool Remove(User user)
+        public bool Remove(int id)
         {
             lock (_lockObject)
             {
+                User? user = _dataContext.Users.FirstOrDefault(u => u.ID == id);
                 return _dataContext.Users.Remove(user);
             }
-            
         }
 
         
         public IEnumerable<User> GetAll()
         {
-            return _dataContext.Users;
+            lock (_lockObject)
+                return _dataContext.Users;
         }
 
         public IEnumerable<User> GetAll(Func<User, bool> filter)
         {
-            return _dataContext.Users.Where(filter);
+            lock (_lockObject)
+                return _dataContext.Users.Where(filter);
         }
         
         public bool Exists(User user)
         {
-            return _dataContext.Users.Contains(user);
+            lock (_lockObject)
+                return _dataContext.Users.Contains(user);
         }
 
         public User Get(string username)
         {
-            return _dataContext.Users.Find(g => g.Username == username);
+            lock (_lockObject)
+                return _dataContext.Users.Find(g => g.Username == username);
         }
 
         public bool Remove(string username)
         {
             lock (_lockObject)
-            {
                 return _dataContext.Users.RemoveAll(g => g.Username.Equals(username)) > 0;
+        }
+
+        public bool Update(int id, User user)
+        {
+            lock (_lockObject)
+            {
+                User old = _dataContext.Users.Find(g => g.ID == id);
+                old.Username = user.Username;
+                old.Password = user.Password;
             }
-            
+
+            return true;
         }
     }
 }

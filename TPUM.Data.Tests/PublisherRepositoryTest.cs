@@ -34,7 +34,7 @@ namespace TPUM.Data.Tests
         {
             Publisher publisher = new Publisher("Dontnod", "FR");
             _publisherRepository.Add(publisher);
-            Assert.True(_publisherRepository.Remove(publisher));
+            Assert.True(_publisherRepository.Remove(publisher.ID));
         }
 
         [Fact]

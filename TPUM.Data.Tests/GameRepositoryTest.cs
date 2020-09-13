@@ -38,7 +38,7 @@ namespace TPUM.Data.Tests
             Game game = new Game("Life is Strange", new Publisher("Dontnod", "F"), 10, new DateTime(2015, 1, 30),
                 Genre.Adventure);
             _gameRepository.Add(game);
-            Assert.True(_gameRepository.Remove(game));
+            Assert.True(_gameRepository.Remove(game.ID));
         }
 
         [Fact]

@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="OPCUAModelDesign.xslt"?>
+<ModelDesign xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" TargetNamespace="http://opcfoundation.org/UA/" xmlns="http://opcfoundation.org/UA/ModelDesign.xsd">
+  <Namespaces>
+    <Namespace Name="ua" Prefix="TPUM_UA" XmlPrefix="ua">http://opcfoundation.org/UA/</Namespace>
+  </Namespaces>
+  <ObjectType xmlns:q1="http://opcfoundation.org/UA/" SymbolicName="q1:TransferGame" BaseType="q1:BaseObjectType">
+    <BrowseName>TransferGame</BrowseName>
+    <Children>
+      <Variable SymbolicName="q1:ID" DataType="q1:Int32" ValueRank="Scalar" AccessLevel="ReadWrite" Historizing="false">
+        <BrowseName>ID</BrowseName>
+      </Variable>
+      <Variable SymbolicName="q1:Title" DataType="q1:String" ValueRank="Scalar" AccessLevel="ReadWrite" Historizing="false">
+        <BrowseName>Title</BrowseName>
+      </Variable>
+      <Variable SymbolicName="q1:Rating" DataType="q1:Decimal" ValueRank="Scalar" AccessLevel="ReadWrite" Historizing="false">
+        <BrowseName>Rating</BrowseName>
+      </Variable>
+      <Variable SymbolicName="q1:Publisher" ValueRank="Scalar" AccessLevel="ReadWrite" Historizing="false">
+        <BrowseName>Publisher</BrowseName>
+      </Variable>
+      <Variable SymbolicName="q1:Premiere" DataType="q1:DateTime" ValueRank="Scalar" AccessLevel="ReadWrite" Historizing="false">
+        <BrowseName>Premiere</BrowseName>
+      </Variable>
+      <Variable SymbolicName="q1:Genres" DataType="q1:UInt32" ValueRank="Scalar" AccessLevel="ReadWrite" Historizing="false">
+        <BrowseName>Genres</BrowseName>
+      </Variable>
+    </Children>
+  </ObjectType>
+  <ObjectType xmlns:q2="http://opcfoundation.org/UA/" SymbolicName="q2:TransferPublisher" BaseType="q2:BaseObjectType">
+    <BrowseName>TransferPublisher</BrowseName>
+    <Children>
+      <Variable SymbolicName="q2:ID" DataType="q2:Int32" ValueRank="Scalar" AccessLevel="ReadWrite" Historizing="false">
+        <BrowseName>ID</BrowseName>
+      </Variable>
+      <Variable SymbolicName="q2:Name" DataType="q2:String" ValueRank="Scalar" AccessLevel="ReadWrite" Historizing="false">
+        <BrowseName>Name</BrowseName>
+      </Variable>
+      <Variable SymbolicName="q2:Country" DataType="q2:String" ValueRank="Scalar" AccessLevel="ReadWrite" Historizing="false">
+        <BrowseName>Country</BrowseName>
+      </Variable>
+    </Children>
+  </ObjectType>
+  <ObjectType xmlns:q3="http://opcfoundation.org/UA/" SymbolicName="q3:TransferUser" BaseType="q3:BaseObjectType">
+    <BrowseName>TransferUser</BrowseName>
+    <Children>
+      <Variable SymbolicName="q3:ID" DataType="q3:Int32" ValueRank="Scalar" AccessLevel="ReadWrite" Historizing="false">
+        <BrowseName>ID</BrowseName>
+      </Variable>
+      <Variable SymbolicName="q3:Username" DataType="q3:String" ValueRank="Scalar" AccessLevel="ReadWrite" Historizing="false">
+        <BrowseName>Username</BrowseName>
+      </Variable>
+      <Variable SymbolicName="q3:Password" DataType="q3:String" ValueRank="Scalar" AccessLevel="ReadWrite" Historizing="false">
+        <BrowseName>Password</BrowseName>
+      </Variable>
+    </Children>
+  </ObjectType>
+</ModelDesign>

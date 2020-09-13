@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UANodeSet xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd">
+  <Models>
+    <Model ModelUri="http://opcfoundation.org/UA/">
+      <RequiredModel ModelUri="http://opcfoundation.org/UA/" Version="1.04" PublicationDate="2016-12-31T00:00:00Z" />
+    </Model>
+  </Models>
+  <Aliases>
+    <Alias Alias="Boolean">i=1</Alias>
+    <Alias Alias="SByte">i=2</Alias>
+    <Alias Alias="Byte">i=3</Alias>
+    <Alias Alias="Int16">i=4</Alias>
+    <Alias Alias="UInt16">i=5</Alias>
+    <Alias Alias="Int32">i=6</Alias>
+    <Alias Alias="UInt32">i=7</Alias>
+    <Alias Alias="Int64">i=8</Alias>
+    <Alias Alias="UInt64">i=9</Alias>
+    <Alias Alias="Float">i=10</Alias>
+    <Alias Alias="Double">i=11</Alias>
+    <Alias Alias="DateTime">i=13</Alias>
+    <Alias Alias="String">i=12</Alias>
+    <Alias Alias="ByteString">i=15</Alias>
+    <Alias Alias="Guid">i=14</Alias>
+    <Alias Alias="XmlElement">i=16</Alias>
+    <Alias Alias="NodeId">i=17</Alias>
+    <Alias Alias="ExpandedNodeId">i=18</Alias>
+    <Alias Alias="QualifiedName">i=20</Alias>
+    <Alias Alias="LocalizedText">i=21</Alias>
+    <Alias Alias="StatusCode">i=19</Alias>
+    <Alias Alias="Structure">i=22</Alias>
+    <Alias Alias="Number">i=26</Alias>
+    <Alias Alias="Integer">i=27</Alias>
+    <Alias Alias="UInteger">i=28</Alias>
+    <Alias Alias="HasComponent">i=47</Alias>
+    <Alias Alias="HasProperty">i=46</Alias>
+    <Alias Alias="Organizes">i=35</Alias>
+    <Alias Alias="HasEventSource">i=36</Alias>
+    <Alias Alias="HasNotifier">i=48</Alias>
+    <Alias Alias="HasSubtype">i=45</Alias>
+    <Alias Alias="HasTypeDefinition">i=40</Alias>
+    <Alias Alias="HasModellingRule">i=37</Alias>
+    <Alias Alias="HasEncoding">i=38</Alias>
+    <Alias Alias="HasDescription">i=39</Alias>
+  </Aliases>
+  <UAObjectType NodeId="i=31" BrowseName="TransferGame">
+    <DisplayName>TransferGame</DisplayName>
+    <References>
+      <Reference ReferenceType="HasComponent">i=32</Reference>
+      <Reference ReferenceType="HasComponent">i=33</Reference>
+      <Reference ReferenceType="HasComponent">i=34</Reference>
+      <Reference ReferenceType="HasComponent">i=35</Reference>
+      <Reference ReferenceType="HasComponent">i=36</Reference>
+      <Reference ReferenceType="HasComponent">i=37</Reference>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=58</Reference>
+    </References>
+  </UAObjectType>
+  <UAVariable NodeId="i=32" BrowseName="ID" ParentNodeId="i=31" DataType="Int32" AccessLevel="3">
+    <DisplayName>ID</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">i=31</Reference>
+    </References>
+  </UAVariable>
+  <UAVariable NodeId="i=33" BrowseName="Title" ParentNodeId="i=31" DataType="String" AccessLevel="3">
+    <DisplayName>Title</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">i=31</Reference>
+    </References>
+  </UAVariable>
+  <UAVariable NodeId="i=34" BrowseName="Rating" ParentNodeId="i=31" DataType="i=50" AccessLevel="3">
+    <DisplayName>Rating</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">i=31</Reference>
+    </References>
+  </UAVariable>
+  <UAVariable NodeId="i=35" BrowseName="Publisher" ParentNodeId="i=31" AccessLevel="3">
+    <DisplayName>Publisher</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">i=31</Reference>
+    </References>
+  </UAVariable>
+  <UAVariable NodeId="i=36" BrowseName="Premiere" ParentNodeId="i=31" DataType="DateTime" AccessLevel="3">
+    <DisplayName>Premiere</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">i=31</Reference>
+    </References>
+  </UAVariable>
+  <UAVariable NodeId="i=37" BrowseName="Genres" ParentNodeId="i=31" DataType="UInt32" AccessLevel="3">
+    <DisplayName>Genres</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">i=31</Reference>
+    </References>
+  </UAVariable>
+  <UAObjectType NodeId="i=38" BrowseName="TransferPublisher">
+    <DisplayName>TransferPublisher</DisplayName>
+    <References>
+      <Reference ReferenceType="HasComponent">i=39</Reference>
+      <Reference ReferenceType="HasComponent">i=40</Reference>
+      <Reference ReferenceType="HasComponent">i=41</Reference>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=58</Reference>
+    </References>
+  </UAObjectType>
+  <UAVariable NodeId="i=39" BrowseName="ID" ParentNodeId="HasEncoding" DataType="Int32" AccessLevel="3">
+    <DisplayName>ID</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">i=38</Reference>
+    </References>
+  </UAVariable>
+  <UAVariable NodeId="i=40" BrowseName="Name" ParentNodeId="HasEncoding" DataType="String" AccessLevel="3">
+    <DisplayName>Name</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">i=38</Reference>
+    </References>
+  </UAVariable>
+  <UAVariable NodeId="i=41" BrowseName="Country" ParentNodeId="HasEncoding" DataType="String" AccessLevel="3">
+    <DisplayName>Country</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">i=38</Reference>
+    </References>
+  </UAVariable>
+  <UAObjectType NodeId="i=42" BrowseName="TransferUser">
+    <DisplayName>TransferUser</DisplayName>
+    <References>
+      <Reference ReferenceType="HasComponent">i=43</Reference>
+      <Reference ReferenceType="HasComponent">i=44</Reference>
+      <Reference ReferenceType="HasComponent">i=45</Reference>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=58</Reference>
+    </References>
+  </UAObjectType>
+  <UAVariable NodeId="i=43" BrowseName="ID" ParentNodeId="i=42" DataType="Int32" AccessLevel="3">
+    <DisplayName>ID</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">i=42</Reference>
+    </References>
+  </UAVariable>
+  <UAVariable NodeId="i=44" BrowseName="Username" ParentNodeId="i=42" DataType="String" AccessLevel="3">
+    <DisplayName>Username</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">i=42</Reference>
+    </References>
+  </UAVariable>
+  <UAVariable NodeId="i=45" BrowseName="Password" ParentNodeId="i=42" DataType="String" AccessLevel="3">
+    <DisplayName>Password</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">i=42</Reference>
+    </References>
+  </UAVariable>
+</UANodeSet>

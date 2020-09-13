@@ -26,13 +26,13 @@ namespace TPUM.Data.Repositories
             return true;
         }
 
-        public bool Remove(Publisher publisher)
+        public bool Remove(int id)
         {
             lock (_lockObject)
             {
+                Publisher? publisher = _dataContext.Publishers.FirstOrDefault(u => u.ID == id);
                 return _dataContext.Publishers.Remove(publisher);
             }
-            
         }
 
 
