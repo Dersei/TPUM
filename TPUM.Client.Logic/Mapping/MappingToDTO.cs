@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
-using TPUM.Communication.DTO;
+using TPUM.Client.Logic.DTO;
 using TPUM.Communication.TransferModel;
+using Genre = TPUM.Client.Logic.DTO.Genre;
 
 namespace TPUM.Client.Logic.Mapping
 {
@@ -18,13 +19,13 @@ namespace TPUM.Client.Logic.Mapping
             return new GameDTO(game.Title, game.Publisher.ToPublisherDTO(), game.Rating, game.Premiere, ToDTOGenres(game.Genres));
         }
 
-        public static TPUM.Communication.DTO.Genre[]? ToDTOGenres(TPUM.Communication.TransferModel.Genre[]? genres)
+        public static Genre[]? ToDTOGenres(TPUM.Communication.TransferModel.Genre[]? genres)
         {
             if (genres is null) return null;
-            TPUM.Communication.DTO.Genre[] targets = new TPUM.Communication.DTO.Genre[genres.Length];
+            Genre[] targets = new Genre[genres.Length];
             for (int i = 0; i < targets.Length; i++)
             {
-                targets[i] = (TPUM.Communication.DTO.Genre)genres[i];
+                targets[i] = (Genre)genres[i];
             }
 
             return targets;

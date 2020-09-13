@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
-using TPUM.Communication.DTO;
+using TPUM.Client.Logic.DTO;
 using TPUM.Communication.TransferModel;
+using Genre = TPUM.Client.Logic.DTO.Genre;
 
 namespace TPUM.Client.Logic.Mapping
 {
@@ -16,7 +17,7 @@ namespace TPUM.Client.Logic.Mapping
             return new TransferGame(game.Title, MapPublisherDTO(game.Publisher), game.Rating, game.Premiere, ToTransferGenres(game.Genres));
         }
 
-        public static TPUM.Communication.TransferModel.Genre[]? ToTransferGenres(TPUM.Communication.DTO.Genre[]? genres)
+        public static TPUM.Communication.TransferModel.Genre[]? ToTransferGenres(Genre[]? genres)
         {
             if (genres is null) return null;
             TPUM.Communication.TransferModel.Genre[] targets = new TPUM.Communication.TransferModel.Genre[genres.Length];

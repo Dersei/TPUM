@@ -6,7 +6,7 @@ namespace TPUM.Client.Logic
 {
     public class ReactiveService : IDisposable
     {
-        public TimeSpan Period { get; private set; }
+        public TimeSpan Period { get; }
 
         public event EventHandler<ReactiveEventArgs>? Tick;
 
@@ -60,7 +60,7 @@ namespace TPUM.Client.Logic
                 Counter = counter;
             }
 
-            public long Counter { get; private set; }
+            public long Counter { get; }
         }
     }
 }

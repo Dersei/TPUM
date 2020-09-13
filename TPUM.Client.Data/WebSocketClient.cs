@@ -47,7 +47,7 @@ namespace TPUM.Client.Data
 
             protected override Task SendTask(string message)
             {
-                return _clientWebSocket.SendAsync(message.GetArraySegment(), WebSocketMessageType.Text, true, CancellationToken.None); ;
+                return _clientWebSocket.SendAsync(message.GetArraySegment(), WebSocketMessageType.Text, true, CancellationToken.None);
             }
 
             public override Task DisconnectAsync()

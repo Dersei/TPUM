@@ -22,7 +22,7 @@ namespace TPUM.Server.Logic
 
         public void Stop()
         {
-          
+            _shouldStop = true;
         }
 
         #endregion API
@@ -50,7 +50,7 @@ namespace TPUM.Server.Logic
                     hc.Response.Close();
                 }
                 HttpListenerWebSocketContext context = await hc.AcceptWebSocketAsync(null);
-                WebSocketConnection ws = new ServerWebSocketConnection(context.WebSocket, hc.Request.RemoteEndPoint);
+                WebSocketConnection ws = new ServerWebSocketConnection(context.WebSocket, hc.Request.RemoteEndPoint!);
                 onConnection?.Invoke(ws);
             }
         }

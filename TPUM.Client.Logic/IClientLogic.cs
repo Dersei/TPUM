@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using TPUM.Client.Logic.DTO;
 using TPUM.Communication;
-using TPUM.Communication.DTO;
 
 namespace TPUM.Client.Logic
 {

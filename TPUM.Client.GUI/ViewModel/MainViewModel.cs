@@ -14,9 +14,9 @@ using TPUM.Client.GUI.View;
 using TPUM.Client.GUI.ViewModel.Commands;
 using TPUM.Client.Logic;
 using TPUM.Communication;
-using TPUM.Communication.DTO;
 using System.Reactive;
 using System.Reactive.Linq;
+using TPUM.Client.Logic.DTO;
 
 namespace TPUM.Client.GUI.ViewModel
 {
@@ -204,10 +204,10 @@ namespace TPUM.Client.GUI.ViewModel
             iView.ShowDialog();
             switch (iView.DataContext)
             {
-                case GameCreationViewModel { CreatedGame: GameDTO createdGame }:
+                case GameCreationViewModel { CreatedGame: { } createdGame }:
                     AddGame(createdGame);
                     break;
-                case UserLoginViewModel { UserCredentials: UserDTO credentials }:
+                case UserLoginViewModel { UserCredentials: { } credentials }:
                     LogIn(credentials);
                     break;
             }

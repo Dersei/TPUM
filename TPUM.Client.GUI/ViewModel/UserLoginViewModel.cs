@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 using TPUM.Client.GUI.ViewModel.Commands;
-using TPUM.Communication.DTO;
+using TPUM.Client.Logic.DTO;
 
 namespace TPUM.Client.GUI.ViewModel
 {

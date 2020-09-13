@@ -1,4 +1,4 @@
-﻿namespace TPUM.Communication.DTO
+﻿namespace TPUM.Client.Logic.DTO
 {
     public enum Genre
     {

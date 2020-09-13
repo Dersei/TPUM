@@ -5,7 +5,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using TPUM.Client.Logic;
 using TPUM.Communication;
-using TPUM.Communication.DTO;
 using TPUM.Communication.Requests;
 using TPUM.Serialization;
 using TPUM.Server.GUI;
@@ -18,13 +17,13 @@ namespace TPUM.Connection.Tests
     public class ConnectionTest
     {
         private readonly Uri _clientAddress = new Uri("ws://localhost:8081/");
-        private WebSocketServer webSocketServer;
+        private WebSocketServer _webSocketServer;
 
         [Fact]
         public void GetAllGamesTest()
         {
-            webSocketServer = new WebSocketServer();
-            webSocketServer.Start(new Uri($@"http://localhost:{8081}/"), OnConnection);
+            _webSocketServer = new WebSocketServer();
+            _webSocketServer.Start(new Uri($@"http://localhost:{8081}/"), OnConnection);
             ClientLogic webSocketClient = ClientLogic.Instance;
             webSocketClient.Connect(_clientAddress);
             webSocketClient.Logout(default);
@@ -37,7 +36,7 @@ namespace TPUM.Connection.Tests
             {
                 RequestLogOut value = Serializer.Deserialize<RequestLogOut>(s);
                 Assert.NotNull(value);
-                webSocketServer.Stop();
+                _webSocketServer.Stop();
             };
             connection.OnError = () =>
             {
